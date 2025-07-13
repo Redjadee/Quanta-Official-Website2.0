@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { TAB_LIST } from '@/static/data.js';
+import { TAB_LIST } from '~/assets/data/data.js';
 import { mapState } from 'vuex';
 export default {
   name: 'TabBar',

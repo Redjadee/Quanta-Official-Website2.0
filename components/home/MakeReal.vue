@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import { MAKE_REAL_LIST } from '@/static/data.js';
+import { MAKE_REAL_LIST } from '~/assets/data/data.js';
 export default {
   name: 'MakeReal',
   data() {

@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { FOOTER } from '@/static/data.js';
+import { FOOTER } from '~/assets/data/data.js';
 
 export default {
   name: 'HomeFooter',

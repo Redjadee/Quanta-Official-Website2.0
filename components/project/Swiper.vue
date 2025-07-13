@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { PROJECT, fetch } from '@/static/data.js';
+import { PROJECT, fetch } from '~/assets/data/data.js';
 import { mapState, mapMutations } from 'vuex';
 import animated from 'animate.css';
 import axios from 'axios';

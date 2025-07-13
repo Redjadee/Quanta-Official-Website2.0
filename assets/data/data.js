@@ -11,7 +11,7 @@ async function fetch() {
   }
 }
 fetch()
-export  {PROJECT,fetch};
+export  { PROJECT,fetch };
 
 export const MENU_COLOR = [
   '#f2b0b8',

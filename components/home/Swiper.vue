@@ -65,7 +65,7 @@
 </template>
 
 <script>
-import { SWIPER_LIST, SWIPER_BUTTON_COLOR } from '@/static/data.js';
+import { SWIPER_LIST, SWIPER_BUTTON_COLOR } from '~/assets/data/data.js';
 export default {
   name: 'HomeSwiper',
   data() {
