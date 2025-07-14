@@ -1,3 +1,80 @@
+<script setup>
+import { ref, computed, watch, onMounted } from 'vue'
+import { useStore } from 'vuex'
+import { useNuxtApp } from '#app'
+import { PROJECT } from '~/assets/data/data.js'
+
+// 初始化
+const { $fetchApi } = useNuxtApp()
+const store = useStore()
+
+// 响应式数据
+const projectSwiperList = ref(PROJECT)
+const projectSwiper = ref(null)
+const projectSwiperOptions = ref({
+  direction: 'vertical',
+  mousewheel: true,
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true
+  },
+  autoHeight: true,
+  slidesPerView: 'auto',
+  loopedSlides: 5,
+  observer: true,
+  observeParents: true,
+  observeSlideChildren: true,
+  noSwiping: true,
+  noSwipingClass: 'stop-swiping'
+})
+
+// 计算属性
+const isThroughMenuChange = computed(() => store.state.isThroughMenuChange)
+const swiperActiveIndex = computed(() => store.state.swiperActiveIndex)
+const computedColor = computed(() => (index) => ({
+  color: '#978bd7'
+}))
+
+// 方法
+const controlIndex = (payload) => store.commit('controlIndex', payload)
+const initBackground = () => store.commit('initBackground')
+
+const slideChange = () => {
+  const swiperIndex = projectSwiper.value.realIndex
+  controlIndex({ swiperIndex, is: false })
+}
+
+// 数据获取
+const fetchProjects = async () => {
+  try {
+    const response = await $fetchApi('/project')
+    projectSwiperList.value = response.data.data
+  } catch (error) {
+    console.error('Error fetching projects:', error)
+  }
+}
+
+// 监听器
+watch(swiperActiveIndex, (index) => {
+  if (isThroughMenuChange.value) {
+    nextTick(() => {
+      projectSwiper.value.slideTo(index)
+    })
+  }
+}, { immediate: true })
+
+// 生命周期钩子
+onMounted(() => {
+  projectSwiper.value?.update()
+  if (!isThroughMenuChange.value) {
+    initBackground()
+  }
+})
+
+// 在 mounted 时调用 fetch
+onMounted(fetchProjects)
+</script>
+
 <template>
   <div id="project-swiper">
     <div v-swiper:projectSwiper="projectSwiperOptions" @slideChange="slideChange">
@@ -36,87 +113,6 @@
   </div>
 </template>
 
-<script>
-import { PROJECT, fetch } from '~/assets/data/data.js';
-import { mapState, mapMutations } from 'vuex';
-import animated from 'animate.css';
-import axios from 'axios';
-
-export default {
-  name: 'ProjectSwiper',
-  data() {
-    return {
-      projectSwiperList: PROJECT,
-      projectSwiperOptions: {
-        direction: 'vertical',
-        mousewheel: true,
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true
-        },
-        autoHeight: true,
-        slidesPerView: 'auto',
-        loopedSlides: 5,
-        // loop: true,
-        observer: true,
-        observeParents: true,
-        observeSlideChildren: true,
-        // 不可拖动块
-        noSwiping: true,
-        noSwipingClass: 'stop-swiping'
-      }
-    };
-  },
-  async fetch() {
-    try {
-      const response = await axios.get(
-        'http://home.linwine.space:7100/api/project'
-      );
-      this.projectSwiperList = response.data.data
-    } catch (error) {
-      console.error('Error fetching projects:', error);
-    }
-  },
-  computed: {
-    ...mapState(['isThroughMenuChange', 'swiperActiveIndex']),
-    computedColor() {
-      return (index) => ({
-        color: '#978bd7'
-      });
-    }
-  },
-  methods: {
-    ...mapMutations(['controlIndex', 'initBackground']),
-    slideChange() {
-      const swiperIndex = this.projectSwiper.realIndex;
-      this.controlIndex({ swiperIndex, is: false });
-    }
-  },
-  watch: {
-    swiperActiveIndex: {
-      handler(index) {
-        // 是否是通过菜单切换的swiper的index
-        if (this.isThroughMenuChange) {
-          this.$nextTick(() => {
-            this.projectSwiper.slideTo(index);
-          });
-        }
-      },
-      immediate: true
-    }
-  },
-  mounted() {
-    this.projectSwiper.update();
-    if (!this.isThroughMenuChange) {
-      this.initBackground();
-    }
-  },
-  // onMounted() {
-  //   console.log(111);
-  //   fetch()
-  // }
-};
-</script>
 
 <style lang="scss" scoped>
 $bullet-color1: #f2b0b8;
