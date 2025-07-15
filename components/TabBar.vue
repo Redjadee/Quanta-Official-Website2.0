@@ -1,3 +1,40 @@
+<script setup>
+import { ref, computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { TAB_LIST } from '~/assets/data/data.js'
+import { storeToRefs } from 'pinia'
+import { useIndexStore } from '~/stores/useIndexStore'
+
+// 路由相关
+const route = useRoute()
+const router = useRouter()
+
+// Pinia状态
+const store = useIndexStore()
+const { swiperActiveIndex } = storeToRefs(store) // 解构并保持响应式
+
+// 组件数据
+const isActive = ref(false)
+const tabList = ref(TAB_LIST)
+
+// 计算属性
+const isTabActive = (name) => ({
+  isTabActive: route.name.includes(name)
+})
+
+const tabActiveColor = (name) => 
+  route.name.includes(name) && route.path.includes('/project')
+    ? { color: '#978bd7', borderColor: '#978bd7' }
+    : {}
+
+// 方法
+const barItemClick = (path) => {
+  if (window.location.pathname !== path) {
+    router.push(path)
+  }
+}
+</script>
+
 <template>
   <div id="tab-bar">
     <div
@@ -12,44 +49,6 @@
     </div>
   </div>
 </template>
-
-<script>
-import { TAB_LIST } from '~/assets/data/data.js';
-import { mapState } from 'vuex';
-export default {
-  name: 'TabBar',
-  data() {
-    return {
-      isActive: false,
-      tabList: TAB_LIST
-    };
-  },
-  computed: {
-    ...mapState(['swiperActiveIndex']),
-    isTabActive() {
-      return (name) => ({
-        isTabActive: this.$route.name.includes(name)
-      });
-    },
-    tabActiveColor() {
-      return (name) =>
-        this.$route.name.includes(name) && this.$route.path.includes('/project')
-          ? {
-              color: '#978bd7',
-              borderColor: '#978bd7'
-            }
-          : {};
-    }
-  },
-  methods: {
-    barItemClick(path) {
-      if (location.pathname != path) {
-        this.$router.push(path);
-      }
-    }
-  }
-};
-</script>
 
 <style lang="scss" scoped>
 #tab-bar {

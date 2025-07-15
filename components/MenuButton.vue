@@ -1,3 +1,59 @@
+<script setup>
+import { ref, watch, computed } from 'vue'
+import { useRouter } from 'vue-router'
+import { useIndexStore } from '~/stores/useIndexStore'
+
+// 定义props
+const props = defineProps({
+  menuColor: String
+})
+
+// 使用路由
+const router = useRouter()
+
+// 使用Pinia store
+const store = useIndexStore()
+
+// 响应式数据
+const checked = ref(false) // 控制隐藏菜单开闭
+
+// 计算属性
+// const swiperActiveIndex = computed(() => store.swiperActiveIndex)
+
+// 方法
+const toHome = (index) => {
+  router.push('/')
+  checked.value = false
+  nextTick(() => {
+    if (index === 1) store.handleToActivity(true)
+    if (index === 2) store.handleToProject(true)
+  })
+}
+
+const toProject = (index) => {
+  router.push('/project')
+  checked.value = false
+  if (index !== 0) {
+    nextTick(() => {
+      store.controlIndex({
+        swiperIndex: index - 1,
+        is: true
+      })
+    })
+  }
+}
+
+const toDevelop = (path) => {
+  router.push(path)
+  checked.value = false
+}
+
+// 监听checked变化
+watch(checked, (newVal) => {
+  store.handleMenuOpen(newVal)
+}, { immediate: true })
+</script>
+
 <template>
   <div id="menu-button">
     <input type="checkbox" id="hidden-checkbox" v-model="checked" />
@@ -52,64 +108,6 @@
     </div>
   </div>
 </template>
-
-<script>
-import { mapMutations, mapState } from 'vuex';
-
-export default {
-  name: 'MenuButton',
-  data() {
-    return {
-      checked: false // 控制隐藏菜单开闭
-    };
-  },
-  props: {
-    menuColor: String
-  },
-  computed: mapState(['swiperActiveIndex']),
-  methods: {
-    ...mapMutations([
-      'handleToActivity',
-      'handleToProject',
-      'controlIndex',
-      'handleMenuOpen'
-    ]),
-    toHome(index) {
-      // 0则转/home，1则跳到home的activity，2则跳到home的project
-      this.$router.push('/');
-      this.checked = false;
-      this.$nextTick(() => {
-        index === 1 && this.handleToActivity(true);
-        index === 2 && this.handleToProject(true);
-      });
-    },
-    toProject(index) {
-      this.$router.push('/project');
-      this.checked = false;
-      if (index !== 0) {
-        this.$nextTick(() => {
-          this.controlIndex({
-            swiperIndex: index - 1,
-            is: true
-          });
-        });
-      }
-    },
-    toDevelop(path) {
-      this.$router.push(path);
-      this.checked = false;
-    }
-  },
-  watch: {
-    checked: {
-      handler(checked) {
-        this.handleMenuOpen(checked);
-      },
-      immediate: true
-    }
-  }
-};
-</script>
 
 <style lang="scss" scoped>
 #menu-button {

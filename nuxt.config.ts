@@ -7,8 +7,9 @@ export default defineNuxtConfig({
     strict: true //严格模式
   },
 
-  modules: [
+  modules: [ //引入的组件
     '@nuxtjs/seo',
+    '@pinia/nuxt'
   ],
 
   runtimeConfig: {

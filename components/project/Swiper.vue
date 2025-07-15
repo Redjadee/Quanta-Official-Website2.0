@@ -1,14 +1,18 @@
 <script setup>
+defineOptions({
+  name: 'ProjectSwiper'
+})
+
 import { ref, computed, watch, onMounted } from 'vue'
-import { useStore } from 'vuex'
 import { useNuxtApp } from '#app'
 import { PROJECT } from '~/assets/data/data.js'
+import { useIndexStore } from '~/stores/useIndexStore'
 
 // 初始化
 const { $fetchApi } = useNuxtApp()
-const store = useStore()
 
 // 响应式数据
+const store = useIndexStore()
 const projectSwiperList = ref(PROJECT)
 const projectSwiper = ref(null)
 const projectSwiperOptions = ref({
@@ -29,15 +33,14 @@ const projectSwiperOptions = ref({
 })
 
 // 计算属性
-const isThroughMenuChange = computed(() => store.state.isThroughMenuChange)
-const swiperActiveIndex = computed(() => store.state.swiperActiveIndex)
+const isThroughMenuChange = computed(() => store.isThroughMenuChange)
+const swiperActiveIndex = computed(() => store.swiperActiveIndex)
 const computedColor = computed(() => (index) => ({
   color: '#978bd7'
 }))
 
 // 方法
-const controlIndex = (payload) => store.commit('controlIndex', payload)
-const initBackground = () => store.commit('initBackground')
+const { controlIndex, initBackground } = useIndexStore()
 
 const slideChange = () => {
   const swiperIndex = projectSwiper.value.realIndex
