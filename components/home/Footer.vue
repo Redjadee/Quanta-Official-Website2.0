@@ -68,17 +68,6 @@ export default {
       this.$router.push('/project');
     },
   },
-  async fetch() {
-    try {
-      const response1 = await this.$axios.get('http://home.linwine.space:7100/api/project/recent');
-      this.displayProject = response1;
-
-      const response2 = await this.$axios.get('http://home.linwine.space:7100/api/connection');
-      this.connectPerson = response2.join('');
-    } catch (error) {
-      console.error('Error fetching projects:', error);
-    }
-  },
 };
 </script>
 

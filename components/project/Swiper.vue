@@ -4,12 +4,9 @@ defineOptions({
 })
 
 import { ref, computed, watch, onMounted } from 'vue'
-import { useNuxtApp } from '#app'
 import { PROJECT } from '~/assets/data/data.js'
 import { useIndexStore } from '~/stores/useIndexStore'
 
-// 初始化
-const { $fetchApi } = useNuxtApp()
 
 // 响应式数据
 const store = useIndexStore()
@@ -45,16 +42,6 @@ const { controlIndex, initBackground } = useIndexStore()
 const slideChange = () => {
   const swiperIndex = projectSwiper.value.realIndex
   controlIndex({ swiperIndex, is: false })
-}
-
-// 数据获取
-const fetchProjects = async () => {
-  try {
-    const response = await $fetchApi('/project')
-    projectSwiperList.value = response.data.data
-  } catch (error) {
-    console.error('Error fetching projects:', error)
-  }
 }
 
 // 监听器

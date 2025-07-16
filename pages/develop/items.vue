@@ -29,20 +29,6 @@ export default {
       showHeight: 800
     };
   },
-  async fetch() {
-    try {
-      const response = await this.$axios.get('http://home.linwine.space:7100/api/project/all');
-      this.projectList = response;
-    } catch (error) {
-      console.error(error);
-    }
-  },
-  // async asyncData(app) {
-  //   const projectList = await app.$getDevelopProjects();
-  //   return {
-  //     projectList
-  //   };
-  // },
   mounted() {
     window.innerWidth < 768 && (this.showHeight = 200);
   }

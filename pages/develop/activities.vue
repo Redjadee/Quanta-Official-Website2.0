@@ -33,35 +33,6 @@ export default {
       showHeight: 800
     };
   },
-  methods: {
-    async fetchLink(id) {
-      try {
-        const response = await this.$axios.get(
-          'http://home.linwine.space:7100/api/activity/url',
-          {
-            params: { id: id } // 通过 params 传递 id 参数
-          }
-        );
-        let link = response.join('');
-        console.log(response, 'res');
-        console.log(link);
-        window.open(link, '_blank');
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  },
-  async fetch() {
-    try {
-      const response = await this.$axios.get(
-        'http://home.linwine.space:7100/api/activity'
-      );
-      console.log(response);
-      this.activitiesList = response;
-    } catch (error) {
-      console.error('Error fetching projects:', error);
-    }
-  },
   mounted() {
     window.innerWidth < 768 && (this.showHeight = 200);
   }

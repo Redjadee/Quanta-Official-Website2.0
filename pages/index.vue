@@ -1,6 +1,10 @@
 <!-- home.vue -->
 <script setup>
-import { ref, onMounted, watch, nextTick, useAsyncData} from 'vue'
+defineOptions({
+  name: 'Home'
+})
+
+import { ref, onMounted, watch, nextTick} from 'vue'
 import { useIndexStore } from '~/stores/useIndexStore'
 import { storeToRefs } from 'pinia'
 import { useSeoMeta } from '#imports'
@@ -22,21 +26,6 @@ useSeoMeta({
   keywords: 'quanta,信息技术,企业化,技术组织,实验室,育人理念,IT行业,运营,策划,市场需求,可行性分析,产品文档,设计,photoshop,illustrator,网页设计,ui设计,开发,研发,前端,安卓,后端，html,css,javascript,页面架构,小程序,小游戏,数据库搭建,mySQL,操作系统,android,java'
 })
 
-// 数据获取
-const { $fetchApi } = useNuxtApp()
-const { data, error } = await useAsyncData(async () => {
-  try {
-    const [projectsRes, activitiesRes] = await Promise.all([
-      $fetchApi('/project/recent'),
-      $fetchApi('/activity/recent')
-    ])
-
-    return { projects: projectsRes, activities: activitiesRes }
-  } catch (err) {
-    console.error('Error fetching data:', err)
-    return { projects: [], activities: [] }
-  }
-})
 
 projects.value = data.value?.projects || []
 activities.value = data.value?.activities || []

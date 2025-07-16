@@ -37,17 +37,6 @@ export default {
       maxTerm: 0 // 最大届数
     };
   },
-  async asyncData(app) {
-    // 获取当前最大届数
-    const data = await app.$getAllDevelopManagers();
-    console.log(data);
-    const maxTerm = data[data.length - 1].term;
-    return {
-      maxTerm,
-      showManagerId: maxTerm,
-      middleId: maxTerm
-    };
-  },
   computed: {
     computedTranslate() {
       const x =
@@ -87,11 +76,6 @@ export default {
         this.getManagers();
       }
     },
-    async getManagers() {
-      const data = await this.$getDevelopManagers(this.showManagerId);
-      this.managersList = data;
-      console.log(data);
-    }
   },
   created() {
     this.getManagers();
