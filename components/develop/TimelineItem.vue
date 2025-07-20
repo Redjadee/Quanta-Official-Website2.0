@@ -25,15 +25,14 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'DevelopTimelineItem',
-  props: {
-    detail: {
-      type: Object
-    }
-  }
-};
+<script setup>
+defineOptions({
+  name: 'DevelopTimelineItem'
+})
+
+const props = defineProps({
+  detail: Object
+})
 </script>
 
 <style lang="scss" scoped>

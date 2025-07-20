@@ -19,20 +19,20 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'DevelopItems',
-  data() {
-    return {
-      projectList: [],
-      // 出现回到顶部按钮的scrollTop
-      showHeight: 800
-    };
-  },
-  mounted() {
-    window.innerWidth < 768 && (this.showHeight = 200);
-  }
-};
+<script setup>
+import { ref, onMounted } from 'vue'
+import BackTopButton from '~/components/BackTopButton.vue'
+
+defineOptions({
+  name: 'DevelopItems'
+})
+
+const projectList = ref([])
+const showHeight = ref(800)
+
+onMounted(() => {
+  if (window.innerWidth < 768) showHeight.value = 200
+})
 </script>
 
 <style lang="scss" scoped>

@@ -23,20 +23,24 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'DevelopActivities',
-  data() {
-    return {
-      activitiesList: [],
-      // 出现回到顶部按钮的scrollTop
-      showHeight: 800
-    };
-  },
-  mounted() {
-    window.innerWidth < 768 && (this.showHeight = 200);
-  }
-};
+<script setup>
+import { ref, onMounted } from 'vue'
+import BackTopButton from '~/components/BackTopButton.vue'
+
+defineOptions({
+  name: 'DevelopActivities'
+})
+
+const activitiesList = ref([])
+const showHeight = ref(800)
+
+onMounted(() => {
+  if (window.innerWidth < 768) showHeight.value = 200
+})
+
+function fetchLink(id) {
+  // Placeholder for click logic if needed
+}
 </script>
 
 <style lang="scss" scoped>

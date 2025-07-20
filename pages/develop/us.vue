@@ -18,10 +18,10 @@
   </div>
 </template>
 
-<script>
-export default {
+<script setup>
+defineOptions({
   name: 'DevelopUs'
-};
+})
 </script>
 
 <style lang="scss" scoped>

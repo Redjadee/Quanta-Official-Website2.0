@@ -27,9 +27,6 @@ useSeoMeta({
 })
 
 
-projects.value = data.value?.projects || []
-activities.value = data.value?.activities || []
-
 // 生命周期钩子
 onMounted(() => {
   nextTick(() => {

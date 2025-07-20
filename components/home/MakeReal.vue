@@ -51,33 +51,27 @@
   </div>
 </template>
 
-<script>
-import { MAKE_REAL_LIST } from '~/assets/data/data.js';
-export default {
-  name: 'MakeReal',
-  data() {
-    return {
-      itemList: MAKE_REAL_LIST
-    };
-  },
-  computed: {
-    swipe() {
-      return this.$refs.shufflingSwipe;
-    }
-  },
-  methods: {
-    toLeft() {
-      this.$nextTick(() => {
-        this.swipe.prev();
-      });
-    },
-    toRight() {
-      this.$nextTick(() => {
-        this.swipe.next();
-      });
-    }
-  }
-};
+<script setup>
+import { ref, nextTick } from 'vue'
+import { MAKE_REAL_LIST } from '~/assets/data/data.js'
+
+defineOptions({
+  name: 'MakeReal'
+})
+
+const itemList = ref(MAKE_REAL_LIST)
+const shufflingSwipe = ref(null)
+
+function toLeft() {
+  nextTick(() => {
+    shufflingSwipe.value?.prev()
+  })
+}
+function toRight() {
+  nextTick(() => {
+    shufflingSwipe.value?.next()
+  })
+}
 </script>
 
 <style lang="scss" scoped>

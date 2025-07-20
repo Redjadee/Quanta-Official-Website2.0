@@ -1,15 +1,3 @@
-let PROJECT = []
-async function fetch() { 
-  try {
-    const { $fetchApi } = useNuxtApp()
-    const response = await $fetchApi('/project')
-    PROJECT = response.data.data
-  } catch (error) {
-    console.error('Error fetching projects:', error);
-  }
-}
-fetch()
-export  { PROJECT,fetch };
 
 export const MENU_COLOR = [
   '#f2b0b8',

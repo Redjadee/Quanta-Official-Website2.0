@@ -24,66 +24,64 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'DevelopManagers',
-  data() {
-    return {
-      width: '',
-      showManagerId: 0,
-      differ: 0, // showManagerId与一开始middleId的差值
-      middleId: 0,
-      managersList: [],
-      maxTerm: 0 // 最大届数
-    };
-  },
-  computed: {
-    computedTranslate() {
-      const x =
-        this.width <= 767
-          ? (this.differ + 12) * -16 + -16 + 'vw'
-          : (this.differ + 12) * -1.08 + 'rem';
-      return { transform: `translateX(${x})` };
-    },
-    getTime() {
-      return (i) =>
-        i === 1 ? `1st` : i === 2 ? `2nd` : i === 3 ? `3rd` : `${i}th`;
-    }
-  },
-  methods: {
-    switchShowManager(id) {
-      this.differ = id - this.middleId;
-      this.showManagerId = id;
-      this.getManagers();
-    },
-    turnLeft() {
-      if (this.showManagerId >= 2) {
-        this.showManagerId--;
-        this.differ = this.showManagerId - this.middleId;
-        this.getManagers();
-      } else {
-        this.showManagerId = 1;
-        this.getManagers();
-      }
-    },
-    turnRight() {
-      if (this.showManagerId <= this.maxTerm - 1) {
-        this.showManagerId++;
-        this.differ = this.showManagerId - this.middleId;
-        this.getManagers();
-      } else {
-        this.showManagerId = this.maxTerm;
-        this.getManagers();
-      }
-    },
-  },
-  created() {
-    this.getManagers();
-  },
-  mounted() {
-    this.width = window.innerWidth;
+<script setup>
+import { ref, computed, onMounted } from 'vue'
+import DevelopTimeline from '~/components/develop/Timeline.vue'
+
+defineOptions({
+  name: 'DevelopManagers'
+})
+
+const width = ref('')
+const showManagerId = ref(0)
+const differ = ref(0)
+const middleId = ref(0)
+const managersList = ref([])
+const maxTerm = ref(0)
+
+const computedTranslate = computed(() => {
+  const x = Number(width.value) <= 767
+    ? (differ.value + 12) * -16 + -16 + 'vw'
+    : (differ.value + 12) * -1.08 + 'rem'
+  return { transform: `translateX(${x})` }
+})
+
+function getTime(i) {
+  return i === 1 ? `1st` : i === 2 ? `2nd` : i === 3 ? `3rd` : `${i}th`
+}
+
+function switchShowManager(id) {
+  differ.value = id - middleId.value
+  showManagerId.value = id
+  getManagers()
+}
+function turnLeft() {
+  if (showManagerId.value >= 2) {
+    showManagerId.value--
+    differ.value = showManagerId.value - middleId.value
+    getManagers()
+  } else {
+    showManagerId.value = 1
+    getManagers()
   }
-};
+}
+function turnRight() {
+  if (showManagerId.value <= maxTerm.value - 1) {
+    showManagerId.value++
+    differ.value = showManagerId.value - middleId.value
+    getManagers()
+  } else {
+    showManagerId.value = maxTerm.value
+    getManagers()
+  }
+}
+function getManagers() {
+  // Placeholder for fetching managers logic
+}
+onMounted(() => {
+  getManagers()
+  width.value = window.innerWidth
+})
 </script>
 
 <style lang="scss" scoped>

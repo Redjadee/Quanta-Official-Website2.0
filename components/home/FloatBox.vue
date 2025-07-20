@@ -11,19 +11,18 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'HomeFloatBox',
-  data() {
-    return {
-      // 出现回到顶部按钮的scrollTop
-      showHeight: 700
-    };
-  },
-  mounted() {
-    window.innerWidth < 768 && (this.showHeight = 200);
-  }
-};
+<script setup>
+import { ref, onMounted } from 'vue'
+
+defineOptions({
+  name: 'HomeFloatBox'
+})
+
+const showHeight = ref(700)
+
+onMounted(() => {
+  if (window.innerWidth < 768) showHeight.value = 200
+})
 </script>
 
 <style lang="scss" scoped>

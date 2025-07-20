@@ -25,7 +25,7 @@
             >
             <a
               class="home-carousel-button"
-              @click="$router.push('/project')"
+              @click="toProjectPage"
               v-else
               >了解更多</a
             >
@@ -36,18 +36,23 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'HomeCarousel',
-  props: {
-    list: {
-      type: Array
-    },
-    type: {
-      type: Number
-    }
-  }
-};
+<script setup>
+import { useRouter } from 'vue-router'
+
+defineOptions({
+  name: 'HomeCarousel'
+})
+
+const props = defineProps({
+  list: Array,
+  type: Number
+})
+
+const router = useRouter()
+
+function toProjectPage() {
+  router.push('/project')
+}
 </script>
 
 <style lang="scss" scoped>
