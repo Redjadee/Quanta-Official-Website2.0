@@ -1,6 +1,5 @@
 <script setup>
-import { ref, watch, computed } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, watch, computed, nextTick } from 'vue'
 import { useIndexStore } from '~/stores/useIndexStore'
 
 // 定义props
@@ -10,6 +9,7 @@ const props = defineProps({
 
 // 使用路由
 const router = useRouter()
+const route = useRoute()
 
 // 使用Pinia store
 const store = useIndexStore()
@@ -18,7 +18,7 @@ const store = useIndexStore()
 const checked = ref(false) // 控制隐藏菜单开闭
 
 // 计算属性
-// const swiperActiveIndex = computed(() => store.swiperActiveIndex)
+const swiperActiveIndex = computed(() => store.swiperActiveIndex)
 
 // 方法
 const toHome = (index) => {
@@ -59,7 +59,7 @@ watch(checked, (newVal) => {
     <input type="checkbox" id="hidden-checkbox" v-model="checked" />
     <label
       :style="{
-        '--labelColor': $route.path === '/project' ? menuColor : '#978bd7'
+        '--labelColor': route.path === '/project' ? menuColor : '#978bd7'
       }"
       id="hidden-checkbox-label"
       for="hidden-checkbox"
@@ -67,7 +67,7 @@ watch(checked, (newVal) => {
     <div
       class="hidden-menu"
       :style="
-        $route.path === '/project' ? { color: menuColor } : { color: '#978bd7' }
+        route.path === '/project' ? { color: menuColor } : { color: '#978bd7' }
       "
     >
       <div class="menu-item">

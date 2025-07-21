@@ -10,8 +10,9 @@ export default defineNuxtConfig({
 
   modules: [
     '@nuxtjs/seo',
+    '@nuxtjs/sitemap',
     '@pinia/nuxt',
-    '@element-plus/nuxt'
+    '@element-plus/nuxt',
   ],
 
 })

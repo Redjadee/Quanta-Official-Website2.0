@@ -2,7 +2,7 @@
   <div id="develop">
     <div class="develop-wrapper">
       <DevelopWelcome v-if="$route.name === 'develop'" />
-      <Nuxt />
+      <slot />
     </div>
   </div>
 </template>
