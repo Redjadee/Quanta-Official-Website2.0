@@ -1,33 +1,3 @@
-<script setup>
-import { ref, computed } from 'vue'
-import { SWIPER_LIST, SWIPER_BUTTON_COLOR } from '~/assets/data/data.js'
-
-defineOptions({
-  name: 'HomeSwiper'
-})
-
-const swiperList = ref(SWIPER_LIST)
-const swipeIndex = ref(0)
-const homeSwipe = ref(null)
-
-function swiperChange(e) {
-  Array.from(document.querySelectorAll('.el-carousel__button')).forEach(
-    (item) => {
-      item.style.background = SWIPER_BUTTON_COLOR[e]
-    }
-  )
-}
-function swipeToOthers(indicatorIndex) {
-  homeSwipe.value?.swipeTo(indicatorIndex)
-}
-function swipeChange(index) {
-  swipeIndex.value = index
-}
-const indicatorColor = computed(() => {
-  return { background: SWIPER_BUTTON_COLOR[swipeIndex.value] }
-})
-</script>
-
 <template>
   <div id="home-swiper">
     <div class="home-swiper-pc">
@@ -93,6 +63,36 @@ const indicatorColor = computed(() => {
     </div>
   </div>
 </template>
+
+<script setup>
+import { ref, computed } from 'vue'
+import { SWIPER_LIST, SWIPER_BUTTON_COLOR } from '~/assets/data/data.js'
+
+defineOptions({
+  name: 'HomeSwiper'
+})
+
+const swiperList = ref(SWIPER_LIST)
+const swipeIndex = ref(0)
+const homeSwipe = ref(null)
+
+function swiperChange(e) {
+  Array.from(document.querySelectorAll('.el-carousel__button')).forEach(
+    (item) => {
+      item.style.background = SWIPER_BUTTON_COLOR[e]
+    }
+  )
+}
+function swipeToOthers(indicatorIndex) {
+  homeSwipe.value?.swipeTo(indicatorIndex)
+}
+function swipeChange(index) {
+  swipeIndex.value = index
+}
+const indicatorColor = computed(() => {
+  return { background: SWIPER_BUTTON_COLOR[swipeIndex.value] }
+})
+</script>
 
 <style lang="scss" scoped>
 #home-swiper {

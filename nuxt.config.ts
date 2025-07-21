@@ -1,20 +1,17 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-05-15',
   devtools: { enabled: true },
-  
-  typescript: { //类型检查
+  ssr: true,
+
+  typescript: { 
     typeCheck: true,
-    strict: true //严格模式
+    strict: true 
   },
 
-  modules: [ //引入的组件
+  modules: [
     '@nuxtjs/seo',
-    '@pinia/nuxt'
+    '@pinia/nuxt',
+    '@element-plus/nuxt'
   ],
 
-  runtimeConfig: {
-    public: {
-      apiBase: 'http://home.linwine.space:7100/api'
-    }
-  }
 })

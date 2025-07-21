@@ -1,4 +1,16 @@
 <!-- home.vue -->
+<template>
+  <div id="home">
+    <HomeMain />
+    <HomeSwiper />
+    <HomeMakeReal />
+    <HomeCarousel :list="activities" :type="0" id="homeActivity" />
+    <HomeCarousel :list="projects" :type="1" id="homeProject" />
+    <HomeFooter />
+    <HomeFloatBox />
+  </div>
+</template>
+
 <script setup>
 defineOptions({
   name: 'Home'
@@ -60,18 +72,6 @@ watch(toProjectChecked, (checked) => {
   }
 }, { immediate: true })
 </script>
-
-<template>
-  <div id="home">
-    <HomeMain />
-    <HomeSwiper />
-    <HomeMakeReal />
-    <HomeCarousel :list="activities" :type="0" id="homeActivity" />
-    <HomeCarousel :list="projects" :type="1" id="homeProject" />
-    <HomeFooter />
-    <HomeFloatBox />
-  </div>
-</template>
 
 <style lang="scss" scoped>
 #home {

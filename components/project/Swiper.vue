@@ -1,14 +1,69 @@
+<template>
+  <div id="project-swiper">
+    <Swiper
+      :modules="modules"
+      :direction="projectSwiperOptions.direction"
+      :mousewheel="projectSwiperOptions.mousewheel"
+      :pagination="projectSwiperOptions.pagination"
+      :autoHeight="projectSwiperOptions.autoHeight"
+      :slides-per-view="projectSwiperOptions.slidesPerView"
+      :looped-slides="projectSwiperOptions.loopedSlides"
+      :observer="projectSwiperOptions.observer"
+      :observe-parents="projectSwiperOptions.observeParents"
+      :observe-slide-children="projectSwiperOptions.observeSlideChildren"
+      :noSwiping="projectSwiperOptions.noSwiping"
+      :noSwipingClass="projectSwiperOptions.noSwipingClass"
+      @slideChange="slideChange"
+      ref="projectSwiper"
+      class="swiper-container"
+    >
+      <SwiperSlide v-for="(slide, index) in projectSwiperList" :key="index">
+        <div class="project-wrapper">
+          <div class="arrow up animated" v-show="index !== 0">
+            <img src="../../static/image/upArrow.png" alt="" class="animate__animated animate__fadeInUp" />
+          </div>
+          <div class="arrow down" v-show="index !== projectSwiperList.length - 1">
+            <img src="../../static/image/downArrow.png" alt="" class="animate__animated animate__fadeInDown" />
+          </div>
+          <div class="show-project">
+            <div class="project-content project-content-left">
+              <h1 class="project-title" :style="computedColor(index)">
+                {{ slide.name }}
+              </h1>
+              <div class="project-detail">
+                {{ slide.content }}
+              </div>
+              <div class="project-knowmore">
+                更多信息，请访问：
+                <a href="https://www.quantacenter.com/develop/items"
+                  :style="computedColor(index)">https://www.quantacenter.com/develop/items</a>
+              </div>
+            </div>
+            <div class="project-img project-img-right">
+              <img class="padImg" :src="slide.href" alt="项目图片" />
+            </div>
+          </div>
+        </div>
+      </SwiperSlide>
+      <div class="swiper-pagination stop-swiping" slot="pagination"></div>
+    </Swiper>
+  </div>
+</template>
+
 <script setup>
+import { ref, computed, watch, onMounted, nextTick } from 'vue'
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import { Mousewheel, Pagination } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/pagination'
+import { PROJECT } from '~/assets/data/data.js'
+import { useIndexStore } from '~/stores/useIndexStore'
+
 defineOptions({
   name: 'ProjectSwiper'
 })
 
-import { ref, computed, watch, onMounted } from 'vue'
-import { PROJECT } from '~/assets/data/data.js'
-import { useIndexStore } from '~/stores/useIndexStore'
-
-
-// 响应式数据
+const modules = [Mousewheel, Pagination]
 const store = useIndexStore()
 const projectSwiperList = ref(PROJECT)
 const projectSwiper = ref(null)
@@ -29,80 +84,35 @@ const projectSwiperOptions = ref({
   noSwipingClass: 'stop-swiping'
 })
 
-// 计算属性
 const isThroughMenuChange = computed(() => store.isThroughMenuChange)
 const swiperActiveIndex = computed(() => store.swiperActiveIndex)
 const computedColor = computed(() => (index) => ({
   color: '#978bd7'
 }))
 
-// 方法
 const { controlIndex, initBackground } = useIndexStore()
 
-const slideChange = () => {
-  const swiperIndex = projectSwiper.value.realIndex
+const slideChange = (swiper) => {
+  const swiperIndex = swiper.realIndex
   controlIndex({ swiperIndex, is: false })
 }
 
-// 监听器
 watch(swiperActiveIndex, (index) => {
   if (isThroughMenuChange.value) {
     nextTick(() => {
-      projectSwiper.value.slideTo(index)
+      projectSwiper.value.swiper.slideTo(index)
     })
   }
 }, { immediate: true })
 
-// 生命周期钩子
 onMounted(() => {
-  projectSwiper.value?.update()
+  projectSwiper.value?.swiper.update()
   if (!isThroughMenuChange.value) {
     initBackground()
   }
 })
 
-// 在 mounted 时调用 fetch
-onMounted(fetchProjects)
 </script>
-
-<template>
-  <div id="project-swiper">
-    <div v-swiper:projectSwiper="projectSwiperOptions" @slideChange="slideChange">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide" v-for="(slide, index) in projectSwiperList" :key="index">
-          <div class="project-wrapper">
-            <div class="arrow up animated" v-show="index !== 0">
-              <img src="../../static/image/upArrow.png" alt="" class="animate__animated animate__fadeInUp" />
-            </div>
-            <div class="arrow down" v-show="index !== projectSwiperList.length - 1">
-              <img src="../../static/image/downArrow.png" alt="" class="animate__animated animate__fadeInDown" />
-            </div>
-            <div class="show-project">
-              <div class="project-content project-content-left">
-                <h1 class="project-title" :style="computedColor(index)">
-                  {{ slide.name }}
-                </h1>
-                <div class="project-detail">
-                  {{ slide.content }}
-                </div>
-                <div class="project-knowmore">
-                  更多信息，请访问：
-                  <a href="https://www.quantacenter.com/develop/items"
-                    :style="computedColor(index)">https://www.quantacenter.com/develop/items</a>
-                </div>
-              </div>
-              <div class="project-img project-img-right">
-                <img class="padImg" :src="slide.href" alt="项目图片" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="swiper-pagination stop-swiping" slot="pagination"></div>
-    </div>
-  </div>
-</template>
-
 
 <style lang="scss" scoped>
 $bullet-color1: #f2b0b8;
