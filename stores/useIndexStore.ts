@@ -15,7 +15,7 @@ export const useIndexStore = defineStore('index', {
     }),
     actions: {
         // is表示是否通过菜单跳转
-        controlIndex(detail: detailType) { //类型不确定
+        controlIndex(detail: detailType) { 
             this.swiperActiveIndex = detail.swiperIndex;
             this.isThroughMenuChange = detail.is;
         },

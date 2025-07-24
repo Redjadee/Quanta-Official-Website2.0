@@ -27,12 +27,18 @@
     </div>
 
     <div class="home-swiper-mobile">
-      <van-swipe
+      <ClientOnly>
+      <swiper-container
         @change="swipeChange"
         class="home-swiper-swipe"
         ref="homeSwipe"
-      >
-        <van-swipe-item v-for="slide in swiperList" :key="slide.id">
+        :loop="true"
+        :pagination="{
+          clickable: true,
+        }"
+
+        >
+        <swiper-slide v-for="slide in swiperList" :key="slide.id">
           <div class="van-home-department">
             <div class="van-home-department-img" :class="slide.imgClass">
               <img :src="slide.img" :alt="slide.title" />
@@ -44,8 +50,8 @@
               </div>
             </div>
           </div>
-        </van-swipe-item>
-        <template #indicator>
+        </swiper-slide>
+        <!-- <template #indicator>
           <div class="van-home-indicators-wrapper">
             <ul class="van-home-indicators">
               <li
@@ -58,8 +64,9 @@
               ></li>
             </ul>
           </div>
-        </template>
-      </van-swipe>
+        </template> -->
+      </swiper-container>
+      </ClientOnly>
     </div>
   </div>
 </template>

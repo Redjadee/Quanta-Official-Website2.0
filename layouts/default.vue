@@ -11,10 +11,10 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useIndexStore } from '~/stores/useIndexStore'
 import { DEFAULT_COLOR, MENU_COLOR, PC_BACKGROUND, PHONE_BACKGROUND } from '~/assets/data/data.js'
+import 'vant/lib/index.css' //引入样式
 
 const width = ref(0)
 const router = useRouter()

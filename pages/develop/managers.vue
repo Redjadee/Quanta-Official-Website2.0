@@ -76,7 +76,7 @@ function turnRight() {
   }
 }
 function getManagers() {
-  // Placeholder for fetching managers logic
+  // fetch函数，获取manager信息
 }
 onMounted(() => {
   getManagers()

@@ -22,6 +22,7 @@ const swiperActiveIndex = computed(() => store.swiperActiveIndex)
 
 // 方法
 const toHome = (index) => {
+  // 0则转/home，1则跳到home的activity，2则跳到home的project
   router.push('/')
   checked.value = false
   nextTick(() => {

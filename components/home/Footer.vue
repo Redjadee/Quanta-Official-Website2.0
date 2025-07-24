@@ -40,7 +40,6 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
 import { FOOTER } from '~/assets/data/data.js'
 
 defineOptions({
@@ -49,8 +48,8 @@ defineOptions({
 
 const router = useRouter()
 const detailList = ref(FOOTER)
-const displayProject = ref([])
-const connectPerson = ref('')
+const displayProject = ref([]) //
+const connectPerson = ref('') //
 
 function goToUsPage() {
   router.push('/develop/us')

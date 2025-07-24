@@ -25,14 +25,21 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 defineOptions({
   name: 'DevelopTimelineItem'
 })
 
-const props = defineProps({
-  detail: Object
-})
+defineProps<{
+  detail: {
+    name: string,
+    position: string,
+    department: string,
+    destination: string,
+    href: string
+  }
+}>()
+
 </script>
 
 <style lang="scss" scoped>

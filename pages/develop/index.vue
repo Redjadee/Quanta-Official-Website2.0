@@ -1,7 +1,7 @@
 <template>
   <div id="develop">
     <div class="develop-wrapper">
-      <DevelopWelcome v-if="$route.name === 'develop'" />
+      <DevelopWelcome v-if="route.name === 'develop'" />
       <slot />
     </div>
   </div>
@@ -17,6 +17,8 @@ defineOptions({
 })
 
 const isShow = ref(false)
+
+const route = useRoute()
 
 useSeoMeta({
   keywords: 'quanta,信息技术,企业化,技术组织,实验室,育人理念,IT团体,管理层,活动,自主项目,冬令营,宣讲会,成员大会,精英分享会,知识分享会,运营部,设计部,研发部,思政学时,粤剧文化博览,广外社团管理系统,云山勤工财务审批系统'

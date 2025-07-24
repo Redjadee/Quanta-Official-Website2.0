@@ -37,8 +37,6 @@
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router'
-
 defineOptions({
   name: 'HomeCarousel'
 })

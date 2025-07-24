@@ -38,9 +38,9 @@ onMounted(() => {
   if (window.innerWidth < 768) showHeight.value = 200
 })
 
-// function fetchLink(id) {
-//   // Placeholder for click logic if needed
-// }
+function fetchLink(id) {
+  // fetch函数，获取活动信息
+}
 </script>
 
 <style lang="scss" scoped>
