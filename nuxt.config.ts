@@ -1,14 +1,22 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-05-15',
   devtools: { enabled: true },
-  
-  typescript: { //类型检查
+  ssr: true, //SSG的前提
+
+  typescript: { 
     typeCheck: true,
-    strict: true //严格模式
   },
 
   modules: [
-    '@nuxtjs/seo',
+    '@nuxtjs/seo', 
+    '@nuxtjs/sitemap', //解决pnpm install报错，重复下载的依赖
+    '@pinia/nuxt', 
+    '@element-plus/nuxt', 
   ],
+
+  vite: {
+    optimizeDeps: {
+      include: ['swiper'], // 防止 Vite 优化时排除 Swiper
+    },
+  },
 })

@@ -1,121 +1,117 @@
 <template>
   <div id="project-swiper">
-    <div v-swiper:projectSwiper="projectSwiperOptions" @slideChange="slideChange">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide" v-for="(slide, index) in projectSwiperList" :key="index">
-          <div class="project-wrapper">
-            <div class="arrow up animated" v-show="index !== 0">
-              <img src="../../static/image/upArrow.png" alt="" class="animate__animated animate__fadeInUp" />
-            </div>
-            <div class="arrow down" v-show="index !== projectSwiperList.length - 1">
-              <img src="../../static/image/downArrow.png" alt="" class="animate__animated animate__fadeInDown" />
-            </div>
-            <div class="show-project">
-              <div class="project-content project-content-left">
-                <h1 class="project-title" :style="computedColor(index)">
-                  {{ slide.name }}
-                </h1>
-                <div class="project-detail">
-                  {{ slide.content }}
-                </div>
-                <div class="project-knowmore">
-                  更多信息，请访问：
-                  <a href="https://www.quantacenter.com/develop/items"
-                    :style="computedColor(index)">https://www.quantacenter.com/develop/items</a>
-                </div>
+    <Swiper
+      :modules="modules"
+      :direction="projectSwiperOptions.direction"
+      :mousewheel="projectSwiperOptions.mousewheel"
+      :pagination="projectSwiperOptions.pagination"
+      :autoHeight="projectSwiperOptions.autoHeight"
+      :slides-per-view="projectSwiperOptions.slidesPerView"
+      :looped-slides="projectSwiperOptions.loopedSlides"
+      :observer="projectSwiperOptions.observer"
+      :observe-parents="projectSwiperOptions.observeParents"
+      :observe-slide-children="projectSwiperOptions.observeSlideChildren"
+      :noSwiping="projectSwiperOptions.noSwiping"
+      :noSwipingClass="projectSwiperOptions.noSwipingClass"
+      @slideChange="slideChange"
+      ref="projectSwiper"
+      class="swiper-container"
+    >
+      <SwiperSlide v-for="(slide, index) in projectSwiperList" :key="index">
+        <div class="project-wrapper">
+          <div class="arrow up animated" v-show="index !== 0">
+            <img src="../../static/image/upArrow.png" alt="" class="animate__animated animate__fadeInUp" />
+          </div>
+          <div class="arrow down" v-show="index !== projectSwiperList.length - 1">
+            <img src="../../static/image/downArrow.png" alt="" class="animate__animated animate__fadeInDown" />
+          </div>
+          <div class="show-project">
+            <div class="project-content project-content-left">
+              <h1 class="project-title" :style="computedColor(index)">
+                {{ slide.name }}
+              </h1>
+              <div class="project-detail">
+                {{ slide.content }}
               </div>
-              <div class="project-img project-img-right">
-                <img class="padImg" :src="slide.href" alt="项目图片" />
+              <div class="project-knowmore">
+                更多信息，请访问：
+                <a href="https://www.quantacenter.com/develop/items"
+                  :style="computedColor(index)">https://www.quantacenter.com/develop/items</a>
               </div>
+            </div>
+            <div class="project-img project-img-right">
+              <img class="padImg" :src="slide.href" alt="项目图片" />
             </div>
           </div>
         </div>
-      </div>
+      </SwiperSlide>
       <div class="swiper-pagination stop-swiping" slot="pagination"></div>
-    </div>
+    </Swiper>
   </div>
 </template>
 
-<script>
-import { PROJECT, fetch } from '~/assets/data/data.js';
-import { mapState, mapMutations } from 'vuex';
-import animated from 'animate.css';
-import axios from 'axios';
+<script setup>
+import { ref, computed, watch, onMounted, nextTick } from 'vue'
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import { Mousewheel, Pagination } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/pagination'
+import { PROJECT } from '~/assets/data/data.js'
+import { useIndexStore } from '~/stores/useIndexStore'
 
-export default {
-  name: 'ProjectSwiper',
-  data() {
-    return {
-      projectSwiperList: PROJECT,
-      projectSwiperOptions: {
-        direction: 'vertical',
-        mousewheel: true,
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true
-        },
-        autoHeight: true,
-        slidesPerView: 'auto',
-        loopedSlides: 5,
-        // loop: true,
-        observer: true,
-        observeParents: true,
-        observeSlideChildren: true,
-        // 不可拖动块
-        noSwiping: true,
-        noSwipingClass: 'stop-swiping'
-      }
-    };
+defineOptions({
+  name: 'ProjectSwiper'
+})
+
+const modules = [Mousewheel, Pagination]
+const store = useIndexStore()
+const projectSwiperList = ref(PROJECT)
+const projectSwiper = ref(null)
+const projectSwiperOptions = ref({
+  direction: 'vertical',
+  mousewheel: true,
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true
   },
-  async fetch() {
-    try {
-      const response = await axios.get(
-        'http://home.linwine.space:7100/api/project'
-      );
-      this.projectSwiperList = response.data.data
-    } catch (error) {
-      console.error('Error fetching projects:', error);
-    }
-  },
-  computed: {
-    ...mapState(['isThroughMenuChange', 'swiperActiveIndex']),
-    computedColor() {
-      return (index) => ({
-        color: '#978bd7'
-      });
-    }
-  },
-  methods: {
-    ...mapMutations(['controlIndex', 'initBackground']),
-    slideChange() {
-      const swiperIndex = this.projectSwiper.realIndex;
-      this.controlIndex({ swiperIndex, is: false });
-    }
-  },
-  watch: {
-    swiperActiveIndex: {
-      handler(index) {
-        // 是否是通过菜单切换的swiper的index
-        if (this.isThroughMenuChange) {
-          this.$nextTick(() => {
-            this.projectSwiper.slideTo(index);
-          });
-        }
-      },
-      immediate: true
-    }
-  },
-  mounted() {
-    this.projectSwiper.update();
-    if (!this.isThroughMenuChange) {
-      this.initBackground();
-    }
-  },
-  // onMounted() {
-  //   console.log(111);
-  //   fetch()
-  // }
-};
+  autoHeight: true,
+  slidesPerView: 'auto',
+  loopedSlides: 5,
+  observer: true,
+  observeParents: true,
+  observeSlideChildren: true,
+  noSwiping: true,
+  noSwipingClass: 'stop-swiping'
+})
+
+const isThroughMenuChange = computed(() => store.isThroughMenuChange)
+const swiperActiveIndex = computed(() => store.swiperActiveIndex)
+const computedColor = computed(() => (index) => ({
+  color: '#978bd7'
+}))
+
+const { controlIndex, initBackground } = useIndexStore()
+
+const slideChange = (swiper) => {
+  const swiperIndex = swiper.realIndex
+  controlIndex({ swiperIndex, is: false })
+}
+
+watch(swiperActiveIndex, (index) => {
+  if (isThroughMenuChange.value) {
+    nextTick(() => {
+      projectSwiper.value.swiper.slideTo(index)
+    })
+  }
+}, { immediate: true })
+
+onMounted(() => {
+  projectSwiper.value?.swiper.update()
+  if (!isThroughMenuChange.value) {
+    initBackground()
+  }
+})
+
 </script>
 
 <style lang="scss" scoped>

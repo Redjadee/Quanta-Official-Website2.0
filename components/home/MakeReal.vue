@@ -18,66 +18,79 @@
         </div>
       </div>
       <div class="make-real-mobile">
-        <van-swipe
-          ref="shufflingSwipe"
-          class="make-real-swipe"
-          :autoplay="3000"
-          :show-indicators="false"
-        >
-          <van-swipe-item v-for="(item, index) in itemList" :key="index">
-            <div class="van-make-real-wrap">
-              <div class="van-make-real-img">
-                <img :src="item.imgSrc" :alt="item.title" />
+        <div class="make-real-swipe-wrapper">
+          <ClientOnly>
+          <swiper
+            :modules="modules"
+            :slides-per-view="1"
+            class="make-real-swipe"
+            :autoplay="{
+              delay: 3000,
+              disableOnInteraction: false,
+            }"
+            :loop="true"
+            @swiper="onSwiper"
+            >
+
+            <swiper-slide v-for="(item, index) in itemList" :key="index">
+              <div class="van-make-real-wrap">
+                <div class="van-make-real-img">
+                  <img :src="item.imgSrc" :alt="item.title" />
+                </div>
+                <div class="van-make-real-content">
+                  <h3>{{ item.title }}</h3>
+                  <p>{{ item.text }}</p>
+                </div>
               </div>
-              <div class="van-make-real-content">
-                <a @click="toLeft">
-                  <img
-                    src="https://quanta-web-1306963863.cos.ap-guangzhou.myqcloud.com/font/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E8%BD%AE%E6%92%AD%E5%9B%BE%E5%90%91%E5%B7%A6.png"
-                  />
-                </a>
-                <h3>{{ item.title }}</h3>
-                <a @click="toRight">
-                  <img
-                    src="https://quanta-web-1306963863.cos.ap-guangzhou.myqcloud.com/font/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E8%BD%AE%E6%92%AD%E5%9B%BE%E5%90%91%E5%8F%B3.png"
-                  />
-                </a>
-                <p>{{ item.text }}</p>
-              </div>
-            </div>
-          </van-swipe-item>
-        </van-swipe>
+            </swiper-slide>
+            <!-- <template v-slot:container-start>
+              <button @click="swipeR.slidePrev()">Left</button>
+            </template>
+            <template v-slot:container-end>
+              <button @click="swipeR.slideNext()">Right</button>
+            </template> -->
+          </swiper>
+          <!-- <template v-if="swiper && swiper.instance">
+            <button class="arrow-btn arrow-prev" @click="swiper.prev()">
+              <img
+                src="https://quanta-web-1306963863.cos.ap-guangzhou.myqcloud.com/font/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E8%BD%AE%E6%92%AD%E5%9B%BE%E5%90%91%E5%B7%A6.png"
+                alt="prev"
+              />
+            </button>
+            <button class="arrow-btn arrow-next" @click="swiper.next()">
+              <img
+                src="https://quanta-web-1306963863.cos.ap-guangzhou.myqcloud.com/font/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E8%BD%AE%E6%92%AD%E5%9B%BE%E5%90%91%E5%8F%B3.png"
+                alt="next"
+              />
+            </button>
+          </template> -->
+          </ClientOnly>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
-<script>
-import { MAKE_REAL_LIST } from '~/assets/data/data.js';
-export default {
-  name: 'MakeReal',
-  data() {
-    return {
-      itemList: MAKE_REAL_LIST
-    };
-  },
-  computed: {
-    swipe() {
-      return this.$refs.shufflingSwipe;
-    }
-  },
-  methods: {
-    toLeft() {
-      this.$nextTick(() => {
-        this.swipe.prev();
-      });
-    },
-    toRight() {
-      this.$nextTick(() => {
-        this.swipe.next();
-      });
-    }
-  }
-};
+<script setup>
+import { ref } from 'vue'
+import { MAKE_REAL_LIST } from '~/assets/data/data.js'
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import { Autoplay } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/autoplay'
+
+defineOptions({ name: 'MakeReal' })
+
+const itemList = ref(MAKE_REAL_LIST)
+
+const modules = [Autoplay]
+
+const swipeR = ref() //规避swiper全小写名字bug
+const onSwiper = (swiper) => {
+  swipeR.value = swiper
+  // console.log(swipeR.value)
+  console.log(swiper)
+} 
 </script>
 
 <style lang="scss" scoped>
@@ -160,12 +173,11 @@ export default {
         }
       }
       .make-real-swipe {
-        .van-swipe-item {
-          background-color: transparent;
-          color: #0e0c0d;
-          text-align: center;
-        }
+        height: 90vw;
+
         .van-make-real-img {
+          display: flex;
+          justify-content: center;
           img {
             width: 38vw;
             height: 38vw;
@@ -174,13 +186,9 @@ export default {
         .van-make-real-content {
           margin-top: 8vw;
           font-weight: bold;
-          a {
-            vertical-align: -5px;
-            margin: 0 30px;
-            img {
-              width: 25px;
-            }
-          }
+          display: flex;
+          flex-direction: column;
+          align-items: center;
           h3 {
             font-weight: bold;
             color: #0e0c0d;
@@ -195,56 +203,15 @@ export default {
             margin-top: 5vw;
           }
         }
+        button {
+          vertical-align: -5px;
+          margin: 0 30px;
+          img {
+            width: 25px;
+          }
+        }
       }
     }
   }
 }
-
-// .van-swipe__track {
-// 	display: flex;
-// }
-// .van-swipe__indicators {
-// 	height: 30px;
-// }
-// .make-real-mobile .make-real-swipe .van-swipe-item {
-// 	background-color: transparent;
-// 	color: #0e0c0d;
-// 	text-align: center;
-// }
-// .make-real-mobile {
-// 	overflow: hidden;
-// 	display: none;
-// }
-
-// .van-make-real-img img {
-// 	width: 38vw;
-// 	height: 38vw;
-// // }
-// .van-make-real-content {
-// 	margin-top: 8vw;
-// 	font-weight: bold;
-// }
-// .van-make-real-content a {
-// 	vertical-align: -5px;
-// 	margin: 0 30px;
-// }
-// .van-make-real-content a img {
-// 	width: 25px;
-// }
-// .van-make-real-content h3 {
-// 	font-weight: bold;
-// 	color: #0e0c0d;
-// 	display: inline-block;
-// 	font-size: 6vw;
-// }
-// .van-make-real-content p {
-// 	color: #949494;
-// 	font-size: 4vw;
-// 	margin: 0 auto;
-// 	width: 50%;
-// 	margin-top: 5vw;
-// }
-// .van-swipe__indicators {
-// 	height: 30px;
-// }
 </style>

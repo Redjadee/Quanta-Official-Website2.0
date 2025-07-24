@@ -7,36 +7,40 @@
       <h1>Meet with</h1>
       <h1>your friends</h1>
       <ul>
-        <li @click="$router.push('/develop/us')">关于我们</li>
-        <li @click="$router.push('/develop/managers')">管理层介绍</li>
-        <li @click="$router.push('/develop/items')">项目介绍</li>
-        <li @click="$router.push('/develop/activities')">近期活动</li>
+        <li @click="toPage('/develop/us')">关于我们</li>
+        <li @click="toPage('/develop/managers')">管理层介绍</li>
+        <li @click="toPage('/develop/items')">项目介绍</li>
+        <li @click="toPage('/develop/activities')">近期活动</li>
       </ul>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'DevelopWelcome',
-  data() {
-    return {
-      width: ''
-    };
-  },
-  computed: {
-    picture() {
-      const arr = [
-        'https://quanta-web-1306963863.cos.ap-guangzhou.myqcloud.com/font/20901642343473_.pic.jpg',
-        'https://quanta-web-1306963863.cos.ap-guangzhou.myqcloud.com/font/10531642651747_.pic_hd.jpg'
-      ];
-      return this.width <= 767 ? arr[0] : arr[1];
-    }
-  },
-  mounted() {
-    this.width = window.innerWidth;
-  }
-};
+<script setup>
+import { ref, computed, onMounted } from 'vue'
+
+defineOptions({
+  name: 'DevelopWelcome'
+})
+
+const width = ref('')
+const router = useRouter()
+
+const picture = computed(() => {
+  const arr = [
+    'https://quanta-web-1306963863.cos.ap-guangzhou.myqcloud.com/font/20901642343473_.pic.jpg',
+    'https://quanta-web-1306963863.cos.ap-guangzhou.myqcloud.com/font/10531642651747_.pic_hd.jpg'
+  ]
+  return Number(width.value) <= 767 ? arr[0] : arr[1]
+})
+
+function toPage(path) {
+  router.push(path)
+}
+
+onMounted(() => {
+  width.value = window.innerWidth
+})
 </script>
 
 <style lang="scss" scoped>

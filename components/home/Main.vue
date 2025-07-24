@@ -1,3 +1,14 @@
+<script setup>
+defineOptions({
+  name: 'HomeMain'
+})
+
+const router = useRouter()
+function toDevelop() {
+  router.push('/develop')
+}
+</script>
+
 <template>
   <div id="home-main">
     <div class="home-main-pc">
@@ -13,7 +24,7 @@
           professional“的宗旨，在这里我们共同探索IT之路,
           着手将一个个设想变为现实
         </p>
-        <button class="home-main-button" @click="$router.push('/develop')">
+        <button class="home-main-button" @click="toDevelop">
           了解更多
         </button>
       </div>
@@ -44,7 +55,7 @@
             professional“的宗旨，在这里我们共同探索IT之路,
             着手将一个个设想变为现实
           </p>
-          <button class="home-main-button" @click="$router.push('/develop')">
+          <button class="home-main-button" @click="toDevelop">
             了解更多
           </button>
         </div>
@@ -52,12 +63,6 @@
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  name: 'HomeMain'
-};
-</script>
 
 <style lang="scss" scoped>
 #home-main {

@@ -8,17 +8,17 @@
       </div>
       <div class="footer-detail-wrapper">
         <div class="footer-detail-item">
-          <h3 @click="goToUsPage()" class="cursor">关于我们</h3>
+          <h3 @click="goToUsPage" class="cursor">关于我们</h3>
           <ul>
-            <li class="cursor" @click="goToActivityPage()">活动介绍</li>
-            <li class="cursor" @click="goToProjectPage()">项目介绍</li>
-            <li class="cursor" @click="goToManagerPage()">管理层介绍</li>
+            <li class="cursor" @click="goToActivityPage">活动介绍</li>
+            <li class="cursor" @click="goToProjectPage">项目介绍</li>
+            <li class="cursor" @click="goToManagerPage">管理层介绍</li>
           </ul>
         </div>
         <div class="footer-detail-item">
-          <h3 class="cursor" @click="goToProject()">自主产品</h3>
+          <h3 class="cursor" @click="goToProject">自主产品</h3>
           <ul>
-            <li v-for="item in displayProject" class="cursor" @click="goToProject()">{{ item.name }}</li>
+            <li v-for="item in displayProject" class="cursor" @click="goToProject">{{ item.name }}</li>
           </ul>
         </div>
         <div class="footer-detail-item">
@@ -38,48 +38,34 @@
   </div>
 </template>
 
-<script>
-import { FOOTER } from '~/assets/data/data.js';
+<script setup>
+import { ref } from 'vue'
+import { FOOTER } from '~/assets/data/data.js'
 
-export default {
-  name: 'HomeFooter',
-  data() {
-    return {
-      detailList: FOOTER,
-      displayProject: [],
-      connectPerson: '',
-    };
-  },
-  methods: {
-    goToUsPage() {
-      // 使用 $router.push() 方法导航到主页
-      this.$router.push('/develop/us');
-    },
-    goToActivityPage() {
-      this.$router.push('/develop/activities');
-    },
-    goToProjectPage() {
-      this.$router.push('/develop/items');
-    },
-    goToManagerPage() {
-      this.$router.push('/develop/managers');
-    },
-    goToProject() {
-      this.$router.push('/project');
-    },
-  },
-  async fetch() {
-    try {
-      const response1 = await this.$axios.get('http://home.linwine.space:7100/api/project/recent');
-      this.displayProject = response1;
+defineOptions({
+  name: 'HomeFooter'
+})
 
-      const response2 = await this.$axios.get('http://home.linwine.space:7100/api/connection');
-      this.connectPerson = response2.join('');
-    } catch (error) {
-      console.error('Error fetching projects:', error);
-    }
-  },
-};
+const router = useRouter()
+const detailList = ref(FOOTER)
+const displayProject = ref([]) //
+const connectPerson = ref('') //
+
+function goToUsPage() {
+  router.push('/develop/us')
+}
+function goToActivityPage() {
+  router.push('/develop/activities')
+}
+function goToProjectPage() {
+  router.push('/develop/items')
+}
+function goToManagerPage() {
+  router.push('/develop/managers')
+}
+function goToProject() {
+  router.push('/project')
+}
 </script>
 
 <style lang="scss" scoped>

@@ -8,18 +8,19 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'DevelopTimeline',
-  props: {
-    list: {
-      type: Array
-    }
-  },
-  created() {
-    console.log(this.list);
-  }
-};
+<script setup>
+defineOptions({
+  name: 'DevelopTimeline'
+})
+
+const props = defineProps({
+  list: Array
+})
+
+import { onMounted } from 'vue'
+onMounted(() => {
+  console.log(props.list)
+})
 </script>
 
 <style lang="scss" scoped>

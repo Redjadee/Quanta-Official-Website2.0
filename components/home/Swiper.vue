@@ -27,12 +27,18 @@
     </div>
 
     <div class="home-swiper-mobile">
-      <van-swipe
+      <ClientOnly>
+      <swiper-container
         @change="swipeChange"
         class="home-swiper-swipe"
         ref="homeSwipe"
-      >
-        <van-swipe-item v-for="slide in swiperList" :key="slide.id">
+        :loop="true"
+        :pagination="{
+          clickable: true,
+        }"
+
+        >
+        <swiper-slide v-for="slide in swiperList" :key="slide.id">
           <div class="van-home-department">
             <div class="van-home-department-img" :class="slide.imgClass">
               <img :src="slide.img" :alt="slide.title" />
@@ -44,8 +50,8 @@
               </div>
             </div>
           </div>
-        </van-swipe-item>
-        <template #indicator>
+        </swiper-slide>
+        <!-- <template #indicator>
           <div class="van-home-indicators-wrapper">
             <ul class="van-home-indicators">
               <li
@@ -58,46 +64,41 @@
               ></li>
             </ul>
           </div>
-        </template>
-      </van-swipe>
+        </template> -->
+      </swiper-container>
+      </ClientOnly>
     </div>
   </div>
 </template>
 
-<script>
-import { SWIPER_LIST, SWIPER_BUTTON_COLOR } from '~/assets/data/data.js';
-export default {
-  name: 'HomeSwiper',
-  data() {
-    return {
-      swiperList: SWIPER_LIST,
-      swipeIndex: 0
-    };
-  },
-  methods: {
-    swiperChange(e) {
-      Array.from(document.querySelectorAll('.el-carousel__button')).forEach(
-        (item) => {
-          item.style.background = SWIPER_BUTTON_COLOR[e];
-        }
-      );
-    },
-    swipeToOthers(indicatorIndex) {
-      this.swipe.swipeTo(indicatorIndex);
-    },
-    swipeChange(index) {
-      this.swipeIndex = index;
+<script setup>
+import { ref, computed } from 'vue'
+import { SWIPER_LIST, SWIPER_BUTTON_COLOR } from '~/assets/data/data.js'
+
+defineOptions({
+  name: 'HomeSwiper'
+})
+
+const swiperList = ref(SWIPER_LIST)
+const swipeIndex = ref(0)
+const homeSwipe = ref(null)
+
+function swiperChange(e) {
+  Array.from(document.querySelectorAll('.el-carousel__button')).forEach(
+    (item) => {
+      item.style.background = SWIPER_BUTTON_COLOR[e]
     }
-  },
-  computed: {
-    swipe() {
-      return this.$refs.homeSwipe;
-    },
-    indicatorColor() {
-      return { background: SWIPER_BUTTON_COLOR[this.swipeIndex] };
-    }
-  }
-};
+  )
+}
+function swipeToOthers(indicatorIndex) {
+  homeSwipe.value?.swipeTo(indicatorIndex)
+}
+function swipeChange(index) {
+  swipeIndex.value = index
+}
+const indicatorColor = computed(() => {
+  return { background: SWIPER_BUTTON_COLOR[swipeIndex.value] }
+})
 </script>
 
 <style lang="scss" scoped>

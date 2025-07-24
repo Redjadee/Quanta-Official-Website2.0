@@ -1,17 +1,3 @@
-import axios from 'axios';
-let PROJECT = []
-async function fetch() { 
-  try {
-    const response = await axios.get(
-      'http://home.linwine.space:7100/api/project'
-    );
-    PROJECT = response.data.data
-  } catch (error) {
-    console.error('Error fetching projects:', error);
-  }
-}
-fetch()
-export  { PROJECT,fetch };
 
 export const MENU_COLOR = [
   '#f2b0b8',
