@@ -17,6 +17,7 @@ import { DEFAULT_COLOR, MENU_COLOR, PC_BACKGROUND, PHONE_BACKGROUND } from '~/as
 import 'vant/lib/index.css' //引入样式
 
 const width = ref(0)
+
 const route = useRoute()
 const store = useIndexStore()
 const { isMenuOpen, swiperActiveIndex } = storeToRefs(store)

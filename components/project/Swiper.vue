@@ -65,7 +65,7 @@ defineOptions({
 
 const modules = [Mousewheel, Pagination]
 const store = useIndexStore()
-const projectSwiperList = ref([])
+const projectSwiperList = ref(PROJECT)
 const projectSwiper = ref(null)
 const projectSwiperOptions = ref({
   direction: 'vertical',

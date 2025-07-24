@@ -5,7 +5,7 @@
       indicator-position="outside"
       arrow="never"
       :interval="3000"
-    >
+      >
       <el-carousel-item v-for="(item, index) in list" :key="index">
         <img :src="item.href" alt="图片无法显示" />
         <div class="home-carousel-text">

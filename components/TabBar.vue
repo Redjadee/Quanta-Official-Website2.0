@@ -1,5 +1,6 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { TAB_LIST } from '~/assets/data/data.js'
 import { storeToRefs } from 'pinia'
 import { useIndexStore } from '~/stores/useIndexStore'
