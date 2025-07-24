@@ -1,0 +1,61 @@
+@media screen and (min-width: 768px) {
+	html {
+		/* font-size: 53.3333333px; */
+		font-size: calc(768px / 14.4);
+	}
+}
+@media screen and (min-width: 1024px) {
+	html {
+		/* font-size: 71.1111111px; */
+		font-size: calc(1024px / 14.4);
+	}
+}
+@media screen and (min-width: 1280px) {
+	html {
+		/* font-size: 1280px / 15; */
+		/* font-size: 88.8888889px; */
+		font-size: calc(1280px / 14.4);
+	}
+}
+@media screen and (min-width: 1366px) {
+	html {
+		/* font-size: 1366px / 15; */
+		/* font-size: 94.8611111px; */
+		font-size: calc(1366px / 14.4);
+	}
+}
+@media screen and (min-width: 1440px) {
+	html {
+		/* font-size: 1440px / 15; */
+		/* font-size: 100px; */
+		font-size: calc(1440px / 14.4);
+	}
+}
+@media screen and (min-width: 1600px) {
+	html {
+		/* font-size: 1600px / 15; */
+		/* font-size: 111.111111px; */
+		font-size: calc(1600px / 14.4);
+	}
+}
+@media screen and (min-width: 1680px) {
+	html {
+		/* font-size: 1600px / 15; */
+		/* font-size: 116.66667px; */
+		font-size: calc(1680px / 14.4);
+	}
+}
+@media screen and (min-width: 1920px) {
+	html {
+		/* font-size: 1920px / 15; */
+		/* font-size: 133.333333px; */
+		font-size: calc(1920px / 14.4);
+	}
+}
+@media screen and (min-width: 2560px) {
+	html {
+		/* font-size: 2560px / 15; */
+		/* font-size: 177.777778px; */
+		font-size: calc(2560px / 14.4);
+	}
+}
