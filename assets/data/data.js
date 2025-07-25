@@ -14,7 +14,7 @@ export const TAB_LIST = [
   {
     title: '简介',
     path: '/',
-    name: 'home'
+    name: 'index'
   },
   {
     title: '业务',

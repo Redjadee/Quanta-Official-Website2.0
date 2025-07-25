@@ -7,10 +7,10 @@
       <h1>Meet with</h1>
       <h1>your friends</h1>
       <ul>
-        <li @click="$router.push('/develop/us')">关于我们</li>
-        <li @click="$router.push('/develop/managers')">管理层介绍</li>
-        <li @click="$router.push('/develop/items')">项目介绍</li>
-        <li @click="$router.push('/develop/activities')">近期活动</li>
+        <li><NuxtLink to="/develop/us">关于我们</NuxtLink></li>
+        <li><NuxtLink to="/develop/managers">管理层介绍</NuxtLink></li>
+        <li><NuxtLink to="/develop/items">项目介绍</NuxtLink></li>
+        <li><NuxtLink to="/develop/activities">近期活动</NuxtLink></li>
       </ul>
     </div>
   </div>
@@ -162,6 +162,10 @@ onMounted(() => {
     &:hover::after {
       transform: rotate(-45deg) translate(0, 100px);
       transition: all 0.5s;
+    }
+
+    a:active {
+      color: #978bd7; //styleConfirm
     }
   }
 }

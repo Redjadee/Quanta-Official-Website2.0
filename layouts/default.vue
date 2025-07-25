@@ -1,7 +1,9 @@
 <template>
   <div id="app" :style="activeBackground" :class="{ isMenuOpen: isMenuOpen }">
     <nav>
-      <h1 class="quanta-title" :style="titleColor" @click="$router.push('/')">quanta</h1>
+      <NuxtLink to="/">
+        <h1 class="quanta-title" :style="titleColor">quanta</h1>
+      </NuxtLink>
       <MenuButton :menu-color="menuColor" />
       <TabBar />
     </nav>

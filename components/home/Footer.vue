@@ -9,17 +9,17 @@
       </div>
       <div class="footer-detail-wrapper">
         <div class="footer-detail-item">
-          <h3 @click="$router.push('/develop/us')" class="cursor">关于我们</h3>
+          <h3 class="cursor"><NuxtLink to="/develop/us">关于我们</NuxtLink></h3>
           <ul>
-            <li class="cursor" @click="$router.push('/develop/activities')">活动介绍</li>
-            <li class="cursor" @click="$router.push('/develop/items')">项目介绍</li>
-            <li class="cursor" @click="$router.push('/develop/managers')">管理层介绍</li>
+            <li class="cursor"><NuxtLink to="/develop/activities">活动介绍</NuxtLink></li>
+            <li class="cursor"><NuxtLink to="/develop/items">项目介绍</NuxtLink></li>
+            <li class="cursor"><NuxtLink to="/develop/managers">管理层介绍</NuxtLink></li>
           </ul>
         </div>
         <div class="footer-detail-item">
-          <h3 class="cursor" @click="$router.push('/project')">自主产品</h3>
+          <h3 class="cursor"><NuxtLink to="/project">自主产品</NuxtLink></h3>
           <ul>
-            <li v-for="item in displayProject" class="cursor" @click="$router.push('/project')">{{ item.name }}</li>
+            <li v-for="item in displayProject" class="cursor"><NuxtLink to="/project">{{ item.name }}</NuxtLink></li>
           </ul>
         </div>
         <div class="footer-detail-item">
@@ -168,6 +168,10 @@ const connectPerson = ref('') //
               }
             }
           }
+        }
+
+        a:active {
+          color: #978bd7; //styleConfirm
         }
       }
     }

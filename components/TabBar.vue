@@ -1,54 +1,54 @@
-<script setup>
-import { ref, computed } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+<script setup lang='ts'>
+import { ref } from 'vue'
 import { TAB_LIST } from '~/assets/data/data.js'
-import { storeToRefs } from 'pinia'
+//import { storeToRefs } from 'pinia'
 import { useIndexStore } from '~/stores/useIndexStore'
+import type { CSSProperties } from 'vue'
 
 // 路由相关
 const route = useRoute()
-const router = useRouter()
 
 // Pinia状态
 const store = useIndexStore()
-const { swiperActiveIndex } = storeToRefs(store) // 解构并保持响应式
+//const { swiperActiveIndex } = storeToRefs(store)
 
 // 组件数据
-const isActive = ref(false)
+// const isActive = ref(false)
 const tabList = ref(TAB_LIST)
 
 // 计算属性
-const isTabActive = (name) => ({
-  isTabActive: route.name.includes(name)
-})
+const isTabActive = (name: string): string => {
+  return route.name?.toString().includes(name) ? 'isTabActive' : ''
+}
 
-const tabActiveColor = (name) => 
-  route.name.includes(name) && route.path.includes('/project')
+const tabActiveColor = (name: string): CSSProperties => {
+  return route.name?.toString().includes(name) && route.path.includes('/project')
     ? { color: '#978bd7', borderColor: '#978bd7' }
     : {}
+}
 
-// 方法
-const barItemClick = (path) => {
-  if (window.location.pathname !== path) {
-    router.push(path)
-  }
+const getTabLink = (item: any) => {
+  // SSR 下没有 window
+  if (typeof window === 'undefined') return item.path
+  return window.location.pathname !== item.path ? item.path : ''
 }
 </script>
 
 <template>
   <div id="tab-bar">
     <div
-      class="tab-bar-item"
-      :class="isTabActive(item.name)"
-      :style="tabActiveColor(item.name)"
       v-for="(item, index) in tabList"
       :key="index"
-      @click="barItemClick(item.path)"
+      :class="['tab-bar-item', isTabActive(item.name)]"
+      :style="tabActiveColor(item.name)"
     >
-      {{ item.title }}
+      <NuxtLink :to="getTabLink(item)">
+        {{ item.title }}
+      </NuxtLink>
     </div>
   </div>
 </template>
+
 
 <style lang="scss" scoped>
 #tab-bar {
@@ -68,6 +68,10 @@ const barItemClick = (path) => {
     position: relative;
     font-size: 0.2rem;
     padding-bottom: 0.05rem;
+
+    a:active {
+      color: #978bd7; //styleConfirm
+    }
   }
   .isTabActive {
     color: #978bd7;

@@ -1,3 +1,4 @@
+<!-- 移动端菜单组件 -->
 <script setup>
 import { ref, watch, computed, nextTick } from 'vue'
 import { useIndexStore } from '~/stores/useIndexStore'
@@ -23,6 +24,7 @@ const swiperActiveIndex = computed(() => store.swiperActiveIndex)
 // 方法
 const toHome = (index) => {
   // 0则转/home，1则跳到home的activity，2则跳到home的project
+  // comfirm: 但是目前代码无法实现吧？
   router.push('/')
   checked.value = false
   nextTick(() => {
@@ -83,6 +85,7 @@ watch(checked, (newVal) => {
           </li>
         </ul>
       </div>
+      <!-- 缺少数据 -->
       <div class="menu-item">
         <h3 class="menu-item-title" @click="toProject(0)">自主项目</h3>
         <ul>
@@ -94,13 +97,14 @@ watch(checked, (newVal) => {
           <li @click="toProject(6)">宿舍管理系统</li>
         </ul>
       </div>
+      <!--  -->
       <div class="menu-item">
-        <h3 class="menu-item-title" @click="toDevelop('/develop')">发展之路</h3>
+        <h3 class="menu-item-title"><NuxtLink to="/develop">发展之路</NuxtLink></h3>
         <ul>
-          <li @click="toDevelop('/develop/us')">关于我们</li>
-          <li @click="toDevelop('/develop/managers')">管理层介绍</li>
-          <li @click="toDevelop('/develop/items')">项目介绍</li>
-          <li @click="toDevelop('/develop/activities')">活动介绍</li>
+          <li><NuxtLink to="/develop/us">关于我们</NuxtLink></li>
+          <li><NuxtLink to="/develop/managers">管理层介绍</NuxtLink></li>
+          <li><NuxtLink to="/develop/items">项目介绍</NuxtLink></li>
+          <li><NuxtLink to="/develop/activities">活动介绍</NuxtLink></li>
         </ul>
       </div>
       <div class="menu-item">

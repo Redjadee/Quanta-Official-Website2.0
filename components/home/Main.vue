@@ -19,9 +19,9 @@ defineOptions({
           professional“的宗旨，在这里我们共同探索IT之路,
           着手将一个个设想变为现实
         </p>
-        <button class="home-main-button" @click="$router.push('/develop')">
-          了解更多
-        </button>
+        <NuxtLink to="/develop">
+          <button class="home-main-button">了解更多</button>
+        </NuxtLink>
       </div>
       <div id="home-img-container">
         <img
@@ -50,9 +50,9 @@ defineOptions({
             professional“的宗旨，在这里我们共同探索IT之路,
             着手将一个个设想变为现实
           </p>
-          <button class="home-main-button" @click="$router.push('/develop')">
-            了解更多
-          </button>
+          <NuxtLink to="/develop">
+            <button class="home-main-button">了解更多</button>
+          </NuxtLink>
         </div>
       </div>
     </div>
