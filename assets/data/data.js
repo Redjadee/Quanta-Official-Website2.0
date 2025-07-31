@@ -58,7 +58,7 @@ export const SWIPER_LIST = [
   },
   {
     id: 2,
-    title: '运营部',
+    title: '产品部',
     detail:
       '负责产品的策划与运营，围绕用户需求、市场需求进行可行性分析，从而确定产品受众、功能，编写商业需求文档、产品文档，进行竞品分析井制作产品的demo;围绕用户需求进行用户调研，据此对产品进行优化和迭代，并通过拉新 、留存、促活等推广方案使产品活得更好。',
     img: 'https://quanta-web-1306963863.cos.ap-guangzhou.myqcloud.com/font/%E8%BF%90%E8%90%A5@2x-2.png',

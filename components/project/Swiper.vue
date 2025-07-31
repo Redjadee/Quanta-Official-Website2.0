@@ -1,24 +1,15 @@
 <!-- 缺少数据 -->
 <template>
   <div id="project-swiper">
-    <Swiper
-      :modules="modules"
-      :direction="projectSwiperOptions.direction"
-      :mousewheel="projectSwiperOptions.mousewheel"
-      :pagination="projectSwiperOptions.pagination"
-      :autoHeight="projectSwiperOptions.autoHeight"
-      :slides-per-view="projectSwiperOptions.slidesPerView"
-      :looped-slides="projectSwiperOptions.loopedSlides"
-      :observer="projectSwiperOptions.observer"
-      :observe-parents="projectSwiperOptions.observeParents"
-      :observe-slide-children="projectSwiperOptions.observeSlideChildren"
-      :noSwiping="projectSwiperOptions.noSwiping"
-      :noSwipingClass="projectSwiperOptions.noSwipingClass"
+    <!-- comfirm: Swiper 没有完整迁移，需要数据以及样式 -->
+    <el-carousel
+      direction="vertical"
+      :autoplay="false"
       @slideChange="slideChange"
       ref="projectSwiper"
       class="swiper-container"
-    >
-      <SwiperSlide v-for="(slide, index) in projectSwiperList" :key="index">
+      >
+      <el-carousel-item v-for="(slide, index) in projectSwiperList" :key="index">
         <div class="project-wrapper">
           <div class="arrow up animated" v-show="index !== 0">
             <img src="../../static/image/upArrow.png" alt="" class="animate__animated animate__fadeInUp" />
@@ -45,45 +36,38 @@
             </div>
           </div>
         </div>
-      </SwiperSlide>
-      <div class="swiper-pagination stop-swiping" slot="pagination"></div>
-    </Swiper>
+      </el-carousel-item>
+      <!-- <div class="swiper-pagination stop-swiping" slot="pagination"></div> -->
+    </el-carousel>
   </div>
 </template>
 
 <script setup>
 import { ref, computed, watch, onMounted, nextTick } from 'vue'
-import { Swiper, SwiperSlide } from 'swiper/vue'
-import { Mousewheel, Pagination } from 'swiper/modules'
-import 'swiper/css'
-import 'swiper/css/pagination'
 import { useIndexStore } from '~/stores/useIndexStore'
 
 defineOptions({
   name: 'ProjectSwiper'
 })
-
-const modules = [Mousewheel, Pagination]
 const store = useIndexStore()
 const projectSwiperList = ref([])
 const projectSwiper = ref(null)
-const projectSwiperOptions = ref({
-  direction: 'vertical',
-  mousewheel: true,
-  pagination: {
-    el: '.swiper-pagination',
-    clickable: true
-  },
-  autoHeight: true,
-  slidesPerView: 'auto',
-  loopedSlides: 5,
-  observer: true,
-  observeParents: true,
-  observeSlideChildren: true,
-  noSwiping: true,
-  noSwipingClass: 'stop-swiping'
-})
-
+// const projectSwiperOptions = ref({
+//   mousewheel: true,
+//   pagination: {
+//     el: '.swiper-pagination',
+//     clickable: true
+//   },
+//   autoHeight: true,
+//   slidesPerView: 'auto',
+//   loopedSlides: 5,
+//   observer: true,
+//   observeParents: true,
+//   observeSlideChildren: true,
+//   noSwiping: true,
+//   noSwipingClass: 'stop-swiping'
+// })
+// :noSwipingClass="projectSwiperOptions.noSwipingClass"
 const isThroughMenuChange = computed(() => store.isThroughMenuChange)
 const swiperActiveIndex = computed(() => store.swiperActiveIndex)
 const computedColor = computed(() => (index) => ({
@@ -105,12 +89,12 @@ watch(swiperActiveIndex, (index) => {
   }
 }, { immediate: true })
 
-onMounted(() => {
-  projectSwiper.value?.swiper.update()
-  if (!isThroughMenuChange.value) {
-    initBackground()
-  }
-})
+// onMounted(() => {
+//   projectSwiper.value?.swiper.update()
+//   if (!isThroughMenuChange.value) {
+//     initBackground()
+//   }
+// })
 
 </script>
 

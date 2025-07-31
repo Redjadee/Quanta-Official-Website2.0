@@ -27,18 +27,16 @@
     </div>
 
     <div class="home-swiper-mobile">
-      <ClientOnly>
-      <swiper-container
-        @change="swipeChange"
+      <el-carousel
+        @change="swiperChange"
         class="home-swiper-swipe"
         ref="homeSwipe"
-        :loop="true"
-        :pagination="{
-          clickable: true,
-        }"
-
+        arrow="never"
+        :autoplay="false"
+        indicator-position="outside"
+        trigger="click"
         >
-        <swiper-slide v-for="slide in swiperList" :key="slide.id">
+        <el-carousel-item v-for="slide in swiperList" :key="slide.id">
           <div class="van-home-department">
             <div class="van-home-department-img" :class="slide.imgClass">
               <img :src="slide.img" :alt="slide.title" />
@@ -50,29 +48,14 @@
               </div>
             </div>
           </div>
-        </swiper-slide>
-        <!-- <template #indicator>
-          <div class="van-home-indicators-wrapper">
-            <ul class="van-home-indicators">
-              <li
-                class="van-home-indicator"
-                v-for="i in 4"
-                :key="i"
-                :class="{ indicatorOpacity: swipeIndex === i - 1 }"
-                :style="indicatorColor"
-                @click="swipeToOthers(i - 1)"
-              ></li>
-            </ul>
-          </div>
-        </template> -->
-      </swiper-container>
-      </ClientOnly>
+        </el-carousel-item>
+      </el-carousel>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { SWIPER_LIST, SWIPER_BUTTON_COLOR } from '~/assets/data/data.js'
 
 defineOptions({
@@ -80,8 +63,6 @@ defineOptions({
 })
 
 const swiperList = ref(SWIPER_LIST)
-const swipeIndex = ref(0)
-const homeSwipe = ref(null)
 
 function swiperChange(e) {
   Array.from(document.querySelectorAll('.el-carousel__button')).forEach(
@@ -90,15 +71,7 @@ function swiperChange(e) {
     }
   )
 }
-function swipeToOthers(indicatorIndex) {
-  homeSwipe.value?.swipeTo(indicatorIndex)
-}
-function swipeChange(index) {
-  swipeIndex.value = index
-}
-const indicatorColor = computed(() => {
-  return { background: SWIPER_BUTTON_COLOR[swipeIndex.value] }
-})
+
 </script>
 
 <style lang="scss" scoped>
@@ -299,25 +272,25 @@ const indicatorColor = computed(() => {
           }
         }
       }
-      .van-home-indicators-wrapper {
-        position: absolute;
-        left: 50%;
-        bottom: 0;
-        transform: translateX(-50%);
-        .van-home-indicators {
-          display: flex;
-          .van-home-indicator {
-            width: 3vw;
-            height: 3vw;
-            margin: 1.5vw;
-            border-radius: 50%;
-            opacity: 0.3;
-          }
-          .indicatorOpacity {
-            opacity: 1 !important;
-          }
-        }
-      }
+      // .van-home-indicators-wrapper {
+      //   position: absolute;
+      //   left: 50%;
+      //   bottom: 0;
+      //   transform: translateX(-50%);
+      //   .van-home-indicators {
+      //     display: flex;
+      //     .van-home-indicator {
+      //       width: 3vw;
+      //       height: 3vw;
+      //       margin: 1.5vw;
+      //       border-radius: 50%;
+      //       opacity: 0.3;
+      //     }
+      //     .indicatorOpacity {
+      //       opacity: 1 !important;
+      //     }
+      //   }
+      // }
     }
     .van-swipe {
       position: static;

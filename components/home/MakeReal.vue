@@ -19,20 +19,16 @@
       </div>
       <div class="make-real-mobile">
         <div class="make-real-swipe-wrapper">
-          <ClientOnly>
-          <swiper
-            :modules="modules"
-            :slides-per-view="1"
+          <el-carousel
             class="make-real-swipe"
-            :autoplay="{
-              delay: 3000,
-              disableOnInteraction: false,
-            }"
-            :loop="true"
-            @swiper="onSwiper"
+            :interval="3000"
+            :autoplay="true"
+            arrow="always"
+            indicator-position="none"
+            height="90vw"
+            ref="carouselRef"
             >
-
-            <swiper-slide v-for="(item, index) in itemList" :key="index">
+            <el-carousel-item v-for="(item, index) in itemList" :key="index">
               <div class="van-make-real-wrap">
                 <div class="van-make-real-img">
                   <img :src="item.imgSrc" :alt="item.title" />
@@ -42,14 +38,8 @@
                   <p>{{ item.text }}</p>
                 </div>
               </div>
-            </swiper-slide>
-            <!-- <template v-slot:container-start>
-              <button @click="swipeR.slidePrev()">Left</button>
-            </template>
-            <template v-slot:container-end>
-              <button @click="swipeR.slideNext()">Right</button>
-            </template> -->
-          </swiper>
+            </el-carousel-item>
+          </el-carousel>
           <!-- <template v-if="swiper && swiper.instance">
             <button class="arrow-btn arrow-prev" @click="swiper.prev()">
               <img
@@ -64,7 +54,6 @@
               />
             </button>
           </template> -->
-          </ClientOnly>
         </div>
       </div>
     </div>
@@ -72,25 +61,18 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { MAKE_REAL_LIST } from '~/assets/data/data.js'
-import { Swiper, SwiperSlide } from 'swiper/vue'
-import { Autoplay } from 'swiper/modules'
-import 'swiper/css'
-import 'swiper/css/autoplay'
 
 defineOptions({ name: 'MakeReal' })
 
+const carouselRef = ref(null)
+
+onMounted(() => {
+  console.log('Carousel mounted:', carouselRef.value)
+})
+
 const itemList = ref(MAKE_REAL_LIST)
-
-const modules = [Autoplay]
-
-const swipeR = ref() //规避swiper全小写名字bug
-const onSwiper = (swiper) => {
-  swipeR.value = swiper
-  // console.log(swipeR.value)
-  console.log(swiper)
-} 
 </script>
 
 <style lang="scss" scoped>
@@ -174,7 +156,11 @@ const onSwiper = (swiper) => {
       }
       .make-real-swipe {
         height: 90vw;
-
+        .van-swipe-item {
+          background-color: transparent;
+          color: #0e0c0d;
+          text-align: center;
+        }
         .van-make-real-img {
           display: flex;
           justify-content: center;

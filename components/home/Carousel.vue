@@ -1,3 +1,4 @@
+<!-- 缺少数据 -->
 <template>
   <div class="home-carousel">
     <!-- <el-carousel
