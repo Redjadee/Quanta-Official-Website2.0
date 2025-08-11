@@ -4,6 +4,7 @@ import { ref, watch, computed, nextTick } from 'vue'
 import { useIndexStore } from '~/stores/useIndexStore'
 
 // 定义props
+// 缺少数据
 const props = defineProps({
   menuColor: String
 })
@@ -46,8 +47,7 @@ const toProject = (index) => {
   }
 }
 
-const toDevelop = (path) => {
-  router.push(path)
+const toDevelop = () => {
   checked.value = false
 }
 
@@ -85,7 +85,6 @@ watch(checked, (newVal) => {
           </li>
         </ul>
       </div>
-      <!-- 缺少数据 -->
       <div class="menu-item">
         <h3 class="menu-item-title" @click="toProject(0)">自主项目</h3>
         <ul>
@@ -97,14 +96,13 @@ watch(checked, (newVal) => {
           <li @click="toProject(6)">宿舍管理系统</li>
         </ul>
       </div>
-      <!--  -->
       <div class="menu-item">
-        <h3 class="menu-item-title"><NuxtLink to="/develop">发展之路</NuxtLink></h3>
+        <h3 class="menu-item-title"><NuxtLink to="/develop" @click="toDevelop()">发展之路</NuxtLink></h3>
         <ul>
-          <li><NuxtLink to="/develop/us">关于我们</NuxtLink></li>
-          <li><NuxtLink to="/develop/managers">管理层介绍</NuxtLink></li>
-          <li><NuxtLink to="/develop/items">项目介绍</NuxtLink></li>
-          <li><NuxtLink to="/develop/activities">活动介绍</NuxtLink></li>
+          <li><NuxtLink to="/develop/us" @click="toDevelop()">关于我们</NuxtLink></li>
+          <li><NuxtLink to="/develop/managers" @click="toDevelop()">管理层介绍</NuxtLink></li>
+          <li><NuxtLink to="/develop/items" @click="toDevelop()">项目介绍</NuxtLink></li>
+          <li><NuxtLink to="/develop/activities" @click="toDevelop()">活动介绍</NuxtLink></li>
         </ul>
       </div>
       <div class="menu-item">

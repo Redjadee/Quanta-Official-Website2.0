@@ -1,4 +1,3 @@
-<!-- 缺少数据 -->
 <template>
   <div class="develop-activity">
     <div
@@ -27,12 +26,13 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import BackTopButton from '~/components/BackTopButton.vue'
+import { activityList } from '~/assets/data/tempData'
 
 defineOptions({
   name: 'DevelopActivities'
 })
 
-const activitiesList = ref([])
+const activitiesList = ref(activityList)//~tempData
 const showHeight = ref(800)
 
 onMounted(() => {

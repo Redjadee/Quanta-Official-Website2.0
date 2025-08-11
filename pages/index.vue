@@ -20,6 +20,8 @@ import { ref, onMounted, watch, nextTick} from 'vue'
 import { useIndexStore } from '~/stores/useIndexStore'
 import { storeToRefs } from 'pinia'
 import { useSeoMeta } from '#imports'
+import { projectList } from '~/assets/data/tempData'
+import { activityList } from '~/assets/data/tempData'
 
 // Pinia状态管理
 const store = useIndexStore()
@@ -30,8 +32,8 @@ const { toActivityChecked, toProjectChecked } = storeToRefs(store)
 const width = ref(0)
 const activityTop = ref(0)
 const projectTop = ref(0)
-const activities = ref([])
-const projects = ref([])
+const activities = ref(activityList) //~tempData
+const projects = ref(projectList)
 
 // SEO配置
 useSeoMeta({
@@ -74,6 +76,9 @@ watch(toProjectChecked, (checked) => {
 </script>
 
 <style lang="scss" scoped>
+html {
+  font-size: 20px; //styleConfirm: 改为函数
+}
 #home {
   .home-swiper-container {
     position: relative;

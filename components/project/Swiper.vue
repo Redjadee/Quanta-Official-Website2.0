@@ -1,4 +1,3 @@
-<!-- 缺少数据 -->
 <template>
   <div id="project-swiper">
     <!-- comfirm: Swiper 没有完整迁移，需要数据以及样式 -->
@@ -12,10 +11,10 @@
       <el-carousel-item v-for="(slide, index) in projectSwiperList" :key="index">
         <div class="project-wrapper">
           <div class="arrow up animated" v-show="index !== 0">
-            <img src="../../static/image/upArrow.png" alt="" class="animate__animated animate__fadeInUp" />
+            <img src="/img/upArrow.png" alt="" class="animate__animated animate__fadeInUp" />
           </div>
           <div class="arrow down" v-show="index !== projectSwiperList.length - 1">
-            <img src="../../static/image/downArrow.png" alt="" class="animate__animated animate__fadeInDown" />
+            <img src="/img/downArrow.png" alt="" class="animate__animated animate__fadeInDown" />
           </div>
           <div class="show-project">
             <div class="project-content project-content-left">
@@ -45,12 +44,13 @@
 <script setup>
 import { ref, computed, watch, onMounted, nextTick } from 'vue'
 import { useIndexStore } from '~/stores/useIndexStore'
+import { projectList } from '~/assets/data/tempData'
 
 defineOptions({
   name: 'ProjectSwiper'
 })
 const store = useIndexStore()
-const projectSwiperList = ref([])
+const projectSwiperList = ref(projectList) //~tempData
 const projectSwiper = ref(null)
 // const projectSwiperOptions = ref({
 //   mousewheel: true,

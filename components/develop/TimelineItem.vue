@@ -1,4 +1,3 @@
-<!-- 缺少数据 -->
 <template>
   <div class="managers-item">
     <div class="managers-img">
@@ -31,15 +30,20 @@ defineOptions({
   name: 'DevelopTimelineItem'
 })
 
-defineProps<{
+type Detail = {
+  name: string,
+  position: string,
+  department: string,
+  destination: string,
+  href: string
+}
+
+const props = defineProps({
   detail: {
-    name: string,
-    position: string,
-    department: string,
-    destination: string,
-    href: string
+    type: Object as PropType<Detail>,
+    required: true
   }
-}>()
+})
 
 </script>
 

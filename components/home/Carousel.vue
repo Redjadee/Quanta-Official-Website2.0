@@ -1,7 +1,6 @@
-<!-- 缺少数据 -->
 <template>
   <div class="home-carousel">
-    <!-- <el-carousel
+    <el-carousel
       height="3.38rem"
       indicator-position="outside"
       arrow="never"
@@ -24,16 +23,17 @@
               v-if="!type"
               >了解更多</a
             >
-            <a
+            <NuxtLink 
+              to="/project"
               class="home-carousel-button"
-              @click="$router.push('/project')"
               v-else
-              >了解更多</a
-            >
+              >
+              了解更多
+            </NuxtLink>
           </div>
         </div>
       </el-carousel-item>
-    </el-carousel> -->
+    </el-carousel>
   </div>
 </template>
 

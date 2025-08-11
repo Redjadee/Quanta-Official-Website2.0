@@ -1,4 +1,3 @@
-<!-- 缺少数据 -->
 <template>
   <div id="home-footer">
     <section class="footer-detail">
@@ -41,15 +40,17 @@
 
 <script setup>
 import { ref } from 'vue'
-import { FOOTER } from '~/assets/data/data.js'
+// import { FOOTER } from '~/assets/data/data.js'
+// confirm: 没有使用，疑似前代遗留
+import { displayProjectList, connectPersonName } from '~/assets/data/tempData'
 
 defineOptions({
   name: 'HomeFooter'
 })
 
-const detailList = ref(FOOTER)
-const displayProject = ref([]) //
-const connectPerson = ref('') //
+// const detailList = ref(FOOTER)
+const displayProject = ref(displayProjectList) //~tempData
+const connectPerson = ref(connectPersonName)
 
 </script>
 

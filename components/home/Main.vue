@@ -23,7 +23,7 @@ defineOptions({
           <button class="home-main-button">了解更多</button>
         </NuxtLink>
       </div>
-      <div id="home-img-container">
+      <div class="home-img-container">
         <img
           src="https://quanta-web-1306963863.cos.ap-guangzhou.myqcloud.com/font/%E4%B8%BB%E9%A1%B5%E6%8F%92%E7%94%BB%E5%8E%8B%E7%BC%A9%E7%89%88@2x%202.png"
           alt="主页插画"
@@ -32,7 +32,7 @@ defineOptions({
     </div>
     <div class="home-main-mobile">
       <div class="home-main-wrapper">
-        <div id="home-img-container">
+        <div class="home-img-container">
           <img
             src="https://quanta-web-1306963863.cos.ap-guangzhou.myqcloud.com/font/%E4%B8%BB%E9%A1%B5%E6%8F%92%E7%94%BB%E5%8E%8B%E7%BC%A9%E7%89%88@2x%202.png"
             alt="主页插画"
@@ -178,6 +178,8 @@ defineOptions({
     color: #fff;
     padding: 0.15rem 0.3rem;
     cursor: pointer;
+    margin-top: 0.2rem;
+
     @media screen and (max-width: 767px) {
       & {
         display: none;
@@ -203,11 +205,11 @@ defineOptions({
     }
   }
 
-  #home-img-container {
+  .home-img-container {
     img {
-      width: 5.6rem;
-      height: 5.6rem;
-      margin-top: -0.8rem;
+      width: 6rem;
+      height: 6rem;
+      // margin-top: -0.8rem;
       @media screen and (max-width: 767px) {
         & {
           width: 74vw;

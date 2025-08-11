@@ -1,4 +1,3 @@
-<!-- 缺少数据 -->
 <template>
   <div id="develop-managers">
     <div id="manager-timeline-wrapper">
@@ -28,6 +27,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import DevelopTimeline from '~/components/develop/Timeline.vue'
+import { managers } from '~/assets/data/tempData'
 
 defineOptions({
   name: 'DevelopManagers'
@@ -37,7 +37,7 @@ const width = ref('')
 const showManagerId = ref(0)
 const differ = ref(0)
 const middleId = ref(0)
-const managersList = ref([])
+const managersList = ref(managers) //~tempData
 const maxTerm = ref(0)
 
 const computedTranslate = computed(() => {

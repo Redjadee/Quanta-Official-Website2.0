@@ -1,11 +1,10 @@
-<!-- 缺少数据 -->
 <template>
   <div class="develop-managers">
-    <!-- <DevelopTimelineItem
+    <DevelopTimelineItem
       v-for="manager in list"
       :key="manager.id"
       :detail="manager"
-    /> -->
+    />
   </div>
 </template>
 
