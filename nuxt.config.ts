@@ -14,6 +14,10 @@ export default defineNuxtConfig({
     '@element-plus/nuxt', 
   ],
 
+  css: [
+    '@/assets/style/global.css' //全局样式
+  ],
+
   vite: {
     optimizeDeps: {
       include: ['swiper'], // 防止 Vite 优化时排除 Swiper

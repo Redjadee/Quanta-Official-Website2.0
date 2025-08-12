@@ -22,12 +22,13 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import BackTopButton from '~/components/BackTopButton.vue'
+import { projectList as pjl } from '~/assets/data/tempData'
 
 defineOptions({
   name: 'DevelopItems'
 })
 
-const projectList = ref([])
+const projectList = ref(pjl)
 const showHeight = ref(800)
 
 onMounted(() => {
@@ -38,6 +39,8 @@ onMounted(() => {
 <style lang="scss" scoped>
 .develop-project {
   padding: 0.5rem;
+  box-sizing: border-box;
+  height: calc(100vh - 1.2rem);
   .develop-project-item {
     display: flex;
     height: 2.4rem;

@@ -4,7 +4,6 @@
       class="develop-activity-item"
       v-for="(activity, index) in activitiesList"
       :key="index"
-      @click="fetchLink(activity.id)"
     >
       <a :href="activity.link">
         <div class="develop-activity-text">
@@ -38,15 +37,13 @@ const showHeight = ref(800)
 onMounted(() => {
   if (window.innerWidth < 768) showHeight.value = 200
 })
-
-function fetchLink(id) {
-  // fetch函数，获取活动信息
-}
 </script>
 
 <style lang="scss" scoped>
 .develop-activity {
   padding: 0.5rem;
+  box-sizing: border-box;
+  height: calc(100vh - 1.2rem);
   .develop-activity-item {
     cursor: pointer;
     &:first-child,

@@ -76,9 +76,6 @@ watch(toProjectChecked, (checked) => {
 </script>
 
 <style lang="scss" scoped>
-html {
-  font-size: 20px; //styleConfirm: 改为函数
-}
 #home {
   .home-swiper-container {
     position: relative;

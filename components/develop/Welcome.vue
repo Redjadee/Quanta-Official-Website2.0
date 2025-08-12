@@ -7,10 +7,10 @@
       <h1>Meet with</h1>
       <h1>your friends</h1>
       <ul>
-        <li><NuxtLink to="/develop/us">关于我们</NuxtLink></li>
-        <li><NuxtLink to="/develop/managers">管理层介绍</NuxtLink></li>
-        <li><NuxtLink to="/develop/items">项目介绍</NuxtLink></li>
-        <li><NuxtLink to="/develop/activities">近期活动</NuxtLink></li>
+        <NuxtLink to="/develop/us"><li>关于我们</li></NuxtLink>
+        <NuxtLink to="/develop/managers"><li>管理层介绍</li></NuxtLink>
+        <NuxtLink to="/develop/items"><li>项目介绍</li></NuxtLink>
+        <NuxtLink to="/develop/activities"><li>近期活动</li></NuxtLink>
       </ul>
     </div>
   </div>
@@ -105,6 +105,7 @@ onMounted(() => {
   ul {
     display: flex;
     flex-wrap: wrap;
+    gap: 0.2rem;
     width: 5rem;
     @media screen and (max-width: 767px) {
       & {
@@ -123,7 +124,7 @@ onMounted(() => {
     color: #fafafa;
     background-color: #978bd7;
     font-size: 0.22rem;
-    margin-right: 0.5rem;
+    margin-right: 0.3rem;
     cursor: pointer;
     @media screen and (max-width: 767px) {
       & {

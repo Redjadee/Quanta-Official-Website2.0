@@ -71,7 +71,7 @@ onMounted(() => {
     margin: 0 auto;
     align-items: center;
     height: 1.2rem;
-    padding-top: 0.3rem;
+    // padding-top: 0.3rem;
     
     @media screen and (max-width: 767px) {
       & {
@@ -83,7 +83,7 @@ onMounted(() => {
     .quanta-title {
       cursor: pointer;
       font-family: quanta;
-      font-size: 0.9rem;
+      font-size: 0.3rem;
       color: #28262b;
 
       @media screen and (max-width: 767px) {

@@ -167,7 +167,7 @@ function swiperChange(e) {
         img {
           opacity: 1;
           transition-delay: 0.3s;
-          width: 10rem;
+          // width: 10rem;
         }
       }
       .department-content {

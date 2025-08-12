@@ -17,4 +17,9 @@ useSeoMeta({
 })
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+#project {
+  height: calc(100vh - 1.2rem);
+  
+}
+</style>

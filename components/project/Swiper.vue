@@ -6,16 +6,16 @@
       :autoplay="false"
       @slideChange="slideChange"
       ref="projectSwiper"
-      class="swiper-container"
+      class="swiper-wrapper"
       >
-      <el-carousel-item v-for="(slide, index) in projectSwiperList" :key="index">
+      <el-carousel-item v-for="(slide, index) in projectSwiperList" :key="index" class="swiper-slide">
         <div class="project-wrapper">
-          <div class="arrow up animated" v-show="index !== 0">
+          <!-- <div class="arrow up animated" v-show="index !== 0">
             <img src="/img/upArrow.png" alt="" class="animate__animated animate__fadeInUp" />
           </div>
           <div class="arrow down" v-show="index !== projectSwiperList.length - 1">
             <img src="/img/downArrow.png" alt="" class="animate__animated animate__fadeInDown" />
-          </div>
+          </div> -->
           <div class="show-project">
             <div class="project-content project-content-left">
               <h1 class="project-title" :style="computedColor(index)">
@@ -124,7 +124,6 @@ $bullet-color6: #bcccff;
   }
 
   .swiper-wrapper {
-    flex-direction: column;
 
     .project-wrapper {
       // position: relative;
@@ -286,7 +285,7 @@ $bullet-color6: #bcccff;
     }
   }
 
-  .swiper-container {
+  .swiper-container { //~confirm: 没有使用？
     position: relative;
 
     .swiper-slide {
