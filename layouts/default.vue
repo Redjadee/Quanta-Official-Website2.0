@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useIndexStore } from '~/stores/useIndexStore'
 import { DEFAULT_COLOR, MENU_COLOR, PC_BACKGROUND, PHONE_BACKGROUND } from '~/assets/data/data.js'
@@ -57,6 +57,13 @@ const activeBackground = computed(() => {
 onMounted(() => {
   width.value = window.innerWidth
 })
+
+watch(
+  () => store.swiperActiveIndex, 
+  (newVal, oldVal) => {
+    console.log('from', oldVal, 'to', newVal)
+  }
+)
 </script>
 
 <style lang="scss" scoped>

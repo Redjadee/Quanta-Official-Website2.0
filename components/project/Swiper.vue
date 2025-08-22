@@ -1,21 +1,15 @@
 <template>
   <div id="project-swiper">
-    <!-- comfirm: Swiper 没有完整迁移，需要数据以及样式 -->
     <el-carousel
       direction="vertical"
       :autoplay="false"
-      @slideChange="slideChange"
+      indicator-position="none"
+      @Change="(index) => slideChange(index)"
       ref="projectSwiper"
       class="swiper-wrapper"
       >
       <el-carousel-item v-for="(slide, index) in projectSwiperList" :key="index" class="swiper-slide">
         <div class="project-wrapper">
-          <!-- <div class="arrow up animated" v-show="index !== 0">
-            <img src="/img/upArrow.png" alt="" class="animate__animated animate__fadeInUp" />
-          </div>
-          <div class="arrow down" v-show="index !== projectSwiperList.length - 1">
-            <img src="/img/downArrow.png" alt="" class="animate__animated animate__fadeInDown" />
-          </div> -->
           <div class="show-project">
             <div class="project-content project-content-left">
               <h1 class="project-title" :style="computedColor(index)">
@@ -36,7 +30,6 @@
           </div>
         </div>
       </el-carousel-item>
-      <!-- <div class="swiper-pagination stop-swiping" slot="pagination"></div> -->
     </el-carousel>
   </div>
 </template>
@@ -49,25 +42,11 @@ import { projectList } from '~/assets/data/tempData'
 defineOptions({
   name: 'ProjectSwiper'
 })
+
 const store = useIndexStore()
 const projectSwiperList = ref(projectList) //~tempData
-const projectSwiper = ref(null)
-// const projectSwiperOptions = ref({
-//   mousewheel: true,
-//   pagination: {
-//     el: '.swiper-pagination',
-//     clickable: true
-//   },
-//   autoHeight: true,
-//   slidesPerView: 'auto',
-//   loopedSlides: 5,
-//   observer: true,
-//   observeParents: true,
-//   observeSlideChildren: true,
-//   noSwiping: true,
-//   noSwipingClass: 'stop-swiping'
-// })
-// :noSwipingClass="projectSwiperOptions.noSwipingClass"
+const projectSwiper = ref()
+
 const isThroughMenuChange = computed(() => store.isThroughMenuChange)
 const swiperActiveIndex = computed(() => store.swiperActiveIndex)
 const computedColor = computed(() => (index) => ({
@@ -76,26 +55,34 @@ const computedColor = computed(() => (index) => ({
 
 const { controlIndex, initBackground } = useIndexStore()
 
-const slideChange = (swiper) => {
-  const swiperIndex = swiper.realIndex
+const slideChange = (idx) => {
+  const swiperIndex = idx
   controlIndex({ swiperIndex, is: false })
 }
 
+// 如果是通过移动端menu跳转，则自动滑到对应项目
 watch(swiperActiveIndex, (index) => {
   if (isThroughMenuChange.value) {
     nextTick(() => {
-      projectSwiper.value.swiper.slideTo(index)
+      projectSwiper.value.setActiveItem(index)
     })
   }
 }, { immediate: true })
 
-// onMounted(() => {
-//   projectSwiper.value?.swiper.update()
-//   if (!isThroughMenuChange.value) {
-//     initBackground()
-//   }
-// })
+onMounted(() => {
+  if (!isThroughMenuChange.value) {
+    initBackground() //初始化
+  }
+})
 
+function prev() {
+  projectSwiper.value.prev()
+}
+function next() {
+  projectSwiper.value.next()
+}
+const length = computed(() => projectSwiperList.length - 1)
+defineExpose({ prev, next, swiperActiveIndex, length })
 </script>
 
 <style lang="scss" scoped>
@@ -109,25 +96,21 @@ $bullet-color6: #bcccff;
 #project-swiper {
   overflow: hidden;
   position: relative;
-
-  .reverse {
-    flex-direction: row-reverse;
-
-    .project-detail {
-      width: 60%;
-    }
-
-    .project-img-right {
-      flex: 1 !important;
-      margin-left: auto !important;
-    }
-  }
-
+  display: inline-block;
+  vertical-align: middle;
+  width: 80%;
+  height: auto;
   .swiper-wrapper {
-
+    height: auto;
+    .swiper-slide {
+      height: auto;
+    }
+    :deep(.el-carousel__container) {
+      height: 5rem;
+    }
     .project-wrapper {
-      // position: relative;
-      width: 80%;
+      position: relative;
+
       margin: 0 auto;
       transform: translateY(-0.6rem);
 
@@ -135,28 +118,6 @@ $bullet-color6: #bcccff;
         & {
           transform: translateY(0);
         }
-      }
-
-      .arrow {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-
-        img {
-          width: 0.2rem;
-          height: 0.2rem;
-          animation-iteration-count: infinite;
-          animation-duration: 3s;
-          /* 设置动画持续时间为5秒 */
-        }
-      }
-
-      .up {
-        top: -1.5rem;
-      }
-
-      .down {
-        bottom: -1.5rem;
       }
 
       .show-project {
@@ -169,7 +130,7 @@ $bullet-color6: #bcccff;
           & {
             height: auto;
             display: block;
-            padding-top: 5vh;
+            // padding-top: 5vh;
           }
         }
 
@@ -180,6 +141,7 @@ $bullet-color6: #bcccff;
           justify-content: center;
           flex: 2;
           margin-left: 0.1rem;
+          text-align: initial;
 
           @media screen and (max-width: 767px) {
             & {
@@ -255,18 +217,6 @@ $bullet-color6: #bcccff;
           }
         }
 
-        .phoneImg {
-          width: 4.2rem;
-          height: 4.8rem;
-
-          @media screen and (max-width: 767px) {
-            & {
-              width: 55vw;
-              height: 60vw;
-            }
-          }
-        }
-
         .padImg {
           width: 6rem;
           margin-left: 0.15rem;
@@ -281,58 +231,6 @@ $bullet-color6: #bcccff;
             }
           }
         }
-      }
-    }
-  }
-
-  .swiper-container { //~confirm: 没有使用？
-    position: relative;
-
-    .swiper-slide {
-      height: calc(100vh - 1.2rem);
-      display: flex;
-      align-items: center;
-      position: relative;
-
-      @media screen and (max-width: 767px) {
-        & {
-          overflow: hidden;
-          height: calc(100vh - 20vw);
-          display: block;
-        }
-      }
-    }
-
-    .swiper-pagination {
-      top: calc(50% - 1.2rem / 2);
-      transform: translateY(-50%);
-      right: 0.4rem;
-      display: flex;
-      flex-direction: column;
-
-      @media screen and (max-width: 767px) {
-        & {
-          display: none;
-        }
-      }
-
-      :deep(.swiper-pagination-bullet) {
-        margin: 0.08rem 0;
-        opacity: 1;
-        width: 0.1rem;
-        height: 0.1rem;
-        transition: all 0.2s;
-        background-color: #fff;
-        border: 2px solid #978bd7;
-
-        &:hover {
-          transform: scale(1.4);
-          box-shadow: 0 9px 18px 0 rgba(0, 0, 0, 0.15);
-        }
-      }
-
-      :deep(.swiper-pagination-bullet-active) {
-        transform: scale(1.4);
       }
     }
   }

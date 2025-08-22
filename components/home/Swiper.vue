@@ -211,6 +211,13 @@ function swiperChange(e) {
     }
     .home-swiper-swipe {
       padding-top: 10vw;
+      height: auto;
+      :deep(.el-carousel__container) {
+        height: 5.17rem;
+      }
+      :deep(.el-carousel-item) {
+        height: auto;
+      }
       .van-home-department {
         display: flex;
         flex-direction: column;
@@ -218,9 +225,11 @@ function swiperChange(e) {
         align-items: center;
         text-align: center;
         width: 90%;
+        height: auto;
         margin: 0 auto;
         .van-home-department-img {
           width: 100%;
+          height: auto;
           img {
             margin: 0 auto;
           }
@@ -295,6 +304,24 @@ function swiperChange(e) {
     }
     .van-swipe {
       position: static;
+    }
+    :deep(.el-carousel__button) {
+      background-color: #978bd7;
+      width: 0.3rem;
+      height: 0.25rem;
+      margin: 0.1rem;
+      border-radius: 1rem;
+      transition: all 0.5s;
+      margin-top: -0.5rem;
+      padding-right: 0.2rem;
+      cursor: pointer;
+    }
+    :deep(.is-active) {
+      .el-carousel__button {
+        background: #978bd7;
+        width: 0.4rem;
+        border-radius: 0.4rem;
+      }
     }
   }
 }

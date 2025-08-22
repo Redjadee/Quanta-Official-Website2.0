@@ -4,6 +4,7 @@
       <div class="manager-content">
         <DevelopTimeline :list="managersList" />
       </div>
+      <!-- ~confirm: 没有正常显示 这是实现什么功能？ -->
       <div class="manager-timeline">
         <ul :style="computedTranslate">
           <li v-for="i in maxTerm" :key="i" class="manager-timeline-item" @click="switchShowManager(i, $event)" :class="{
@@ -14,6 +15,7 @@
           </li>
         </ul>
       </div>
+      <!--  -->
       <div class="timeline-left" @click="turnLeft">
         <img src="https://quanta-web-1306963863.cos.ap-guangzhou.myqcloud.com/font/%E5%90%91%E5%B7%A6@2x.png" alt="向左" />
       </div>
@@ -109,6 +111,7 @@ onMounted(() => {
     height: 55vh;
     max-height: 55vh;
     overflow-y: auto;
+    padding-inline: 4%;
 
     @media screen and (max-width: 767px) {
       & {
@@ -370,4 +373,5 @@ onMounted(() => {
 // 			}
 // 		}
 // 	}
-// }</style>
+// }
+</style>

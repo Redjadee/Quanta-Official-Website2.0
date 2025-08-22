@@ -1,12 +1,12 @@
 <template>
   <div id="project">
-    <ProjectSwiper />
+    <ProjectSwiperWrapper />
   </div>
 </template>
 
 <script setup>
 import { useSeoMeta } from '#imports'
-import ProjectSwiper from '~/components/project/Swiper.vue'
+import { ProjectSwiperWrapper } from '#components'
 
 defineOptions({
   name: 'Project'
@@ -20,6 +20,11 @@ useSeoMeta({
 <style lang="scss" scoped>
 #project {
   height: calc(100vh - 1.2rem);
-  
+  text-align: center;
+  @media screen and (max-width: 767px) {
+    & {
+      height: calc(100vh - 20vw);
+    }
+  }
 }
 </style>
