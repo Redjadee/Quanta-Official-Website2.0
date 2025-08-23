@@ -8,22 +8,82 @@ interface managerType {
 
 export const managers: managerType[] = [
     {
-        name: '张三',
-        position: '前端工程师',
-        department: '研发部',
-        destination: '腾讯'
+        name: '官嘉晖',
+        position: 'CEO',
+        department: '',
+        destination: ''
     },
     {
-        name: '李四',
-        position: '后端工程师',
-        department: '研发部',
-        destination: '阿里巴巴'
+        name: '方东升',
+        position: 'COO',
+        department: '',
+        destination: ''
     },
     {
-        name: '王五',
-        position: 'UI设计师',
+        name: '陈壮志',
+        position: 'CTO',
+        department: '',
+        destination: ''
+    },
+    {
+        name: '周俊灿',
+        position: 'CDO',
+        department: '',
+        destination: ''
+    },
+    {
+        name: '朱雪丹',
+        position: 'VP',
+        department: '产品部',
+        destination: ''
+    },
+    {
+        name: '纪小翠',
+        position: 'VP',
+        department: '产品部',
+        destination: ''
+    },
+    {
+        name: '黄耀萱',
+        position: 'VP',
+        department: '产品部',
+        destination: ''
+    },
+    {
+        name: '刘夕绮',
+        position: 'VP',
         department: '设计部',
-        destination: '字节跳动'
+        destination: ''
+    },
+    {
+        name: '谢濠骏',
+        position: 'VP',
+        department: '研发部Web前端',
+        destination: ''
+    },
+    {
+        name: '金琳',
+        position: 'VP',
+        department: '研发部Web前端',
+        destination: ''
+    },
+    {
+        name: '陈佳曼',
+        position: 'VP',
+        department: '研发部Web后端',
+        destination: ''
+    },
+    {
+        name: '冯俊江',
+        position: 'VP',
+        department: '研发部Web后端',
+        destination: ''
+    },
+    {
+        name: '曾春梦',
+        position: 'VP',
+        department: '研发部Android',
+        destination: ''
     },
 ]
 
@@ -39,25 +99,25 @@ interface activityType {
 
 export const activityList: activityType[] = [
     {
-        title: '活动一',
-        publicTime: '2021-01-01',
-        digest: '活动一内容',
-        href: '/img/projectSwiper/project1.png',
-        link: 'https://www.baidu.com'
+        title: 'Quanta杯',
+        publicTime: '2025-06-13',
+        digest: '',
+        href: '/img/activities/QuantaBei.jpg',
+        link: 'https://mp.weixin.qq.com/s/HPRXTm0e9JWF4aMKVBV2MA'
     },
     {
-        title: '活动二',
-        publicTime: '2021-01-02',
-        digest: '活动二内容',
-        href: '/img/projectSwiper/project2.png',
-        link: 'https://www.baidu.com'
+        title: 'Quanta冬令营',
+        publicTime: '2024-12-16',
+        digest: '',
+        href: '/img/activities/DongLingYin.jpg',
+        link: 'https://mp.weixin.qq.com/s/9J6o5KBvaVaKqpeHmx0LJw'
     },
     {
-        title: '活动三',
-        publicTime: '2021-01-03',
-        digest: '活动三内容',
-        href: '/img/projectSwiper/project1.png',
-        link: 'https://www.baidu.com'
+        title: 'Quanta成员大会',
+        publicTime: '2024-11-04',
+        digest: '',
+        href: '/img/activities/ChengYuanDaHui.jpg',
+        link: 'https://mp.weixin.qq.com/s/f9hPTJFqvHVfhMCP2RT09w'
     }
 ]
 
@@ -70,18 +130,24 @@ interface projectType {
 
 export const projectList: projectType[] = [
     {
-        name: '1这是标题',
-        content: '这是内容',
-        href: '/img/projectSwiper/project1.png'
+        name: '广外思政学时小程序',
+        content: '',
+        href: '/img/projects/SiZhengXueShi.jpg'
     },
     {
-        name: '2这是标题',
-        content: '这是内容',
-        href: '/img/projectSwiper/project2.png'
-    },    {
-        name: '3这是标题',
-        content: '这是内容',
-        href: '/img/projectSwiper/project3.png'
+        name: '广外劳动学时小程序',
+        content: '',
+        href: '/img/projects/LaoDongXueShi.jpg'
+    }, 
+    {
+        name: '幻匠信息科技公司官网',
+        content: '',
+        href: '/img/projects/HuanJiang.png'
+    },
+    {
+        name: '粤秀教育官网',
+        content: '',
+        href: '/img/projects/YueXiu.png'
     },
 ]
 
@@ -91,4 +157,4 @@ interface displayProjectType {
 }
 
 export const displayProjectList: displayProjectType[] = projectList
-export const connectPersonName: string = '小林'
+export const connectPersonName: string = '官嘉晖' //现任CEO

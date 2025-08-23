@@ -18,9 +18,7 @@ export default defineNuxtConfig({
     '@/assets/style/global.css' //全局样式
   ],
 
-  vite: {
-    optimizeDeps: {
-      include: ['swiper'], // 防止 Vite 优化时排除 Swiper
-    },
-  },
+  site: {
+    url: 'https://quantacenter.com'
+  }
 })

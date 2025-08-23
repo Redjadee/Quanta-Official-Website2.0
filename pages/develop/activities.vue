@@ -5,7 +5,7 @@
       v-for="(activity, index) in activitiesList"
       :key="index"
     >
-      <a :href="activity.link">
+      <a :href="activity.link" target="_blank">
         <div class="develop-activity-text">
           <h2 class="develop-activity-title">{{ activity.title }}</h2>
           <p class="develop-activity-time">{{ activity.publicTime }}</p>
@@ -44,6 +44,12 @@ onMounted(() => {
   padding: 0.5rem;
   box-sizing: border-box;
   height: calc(100vh - 1.2rem);
+  @media screen and (max-width: 767px) {
+    & {
+      height: auto;
+    }
+  }
+
   .develop-activity-item {
     cursor: pointer;
     &:first-child,
@@ -56,24 +62,27 @@ onMounted(() => {
     }
     @media screen and (max-width: 767px) {
       & {
-        display: block;
         margin: 10vw 0;
+        height: auto;
       }
     }
     a {
       display: flex;
-      height: 2.4rem;
+      height: auto;
       margin-bottom: 0.2rem;
       @media screen and (max-width: 767px) {
         & {
-          display: initial;
+          flex-direction: column;
+          align-items: center;
         }
       }
+
     }
     .develop-activity-text {
       font-weight: bold;
       width: calc(100% * 3 / 7);
       margin-right: 0.3rem;
+      flex: 4;
       @media screen and (max-width: 767px) {
         & {
           width: 85%;
@@ -127,24 +136,24 @@ onMounted(() => {
       }
     }
     .develop-activity-img {
-      flex: 4;
+      flex: 3;
       display: flex;
       align-items: center;
       justify-content: flex-end;
+      height: 90%;
+      width: 75%;
       @media screen and (max-width: 767px) {
         & {
           justify-content: center;
+          width: 85%;
         }
       }
       img {
-        height: 90%;
-        width: 75%;
-        object-fit: fill;
-        @media screen and (max-width: 767px) {
-          & {
-            width: 85%;
-          }
-        }
+        display: block;       /* 去掉默认基线空隙 */
+        width: 100%;
+        height: 100%;
+        object-fit: cover;    /* 关键：裁剪填充 */
+        object-position: center;
       }
     }
   }

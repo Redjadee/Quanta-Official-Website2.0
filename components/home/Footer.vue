@@ -32,7 +32,7 @@
       </div>
     </section>
     <section class="footer-watermark">
-      © 2006-2022 Quanta（量子）信息技术服务中心<br />
+      © 2006-2025 Quanta（量子）信息技术服务中心<br />
       粤ICP备14087613号
     </section>
   </div>
@@ -40,8 +40,6 @@
 
 <script setup>
 import { ref } from 'vue'
-// import { FOOTER } from '~/assets/data/data.js'
-// confirm: 没有使用，疑似前代遗留
 import { displayProjectList, connectPersonName } from '~/assets/data/tempData'
 
 defineOptions({

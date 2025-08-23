@@ -2,12 +2,13 @@
 <script setup>
 import { ref, watch, computed, nextTick } from 'vue'
 import { useIndexStore } from '~/stores/useIndexStore'
+import { displayProjectList } from '~/assets/data/tempData'
 
 // 定义props
-// 缺少数据
 const props = defineProps({
   menuColor: String
 })
+const displayProject = ref(displayProjectList)
 
 // 使用路由
 const router = useRouter()
@@ -88,12 +89,7 @@ watch(checked, (newVal) => {
       <div class="menu-item">
         <h3 class="menu-item-title" @click="toProject(0)">自主项目</h3>
         <ul>
-          <li @click="toProject(1)">云山勤工财务管理系统</li>
-          <li @click="toProject(2)">粤剧文化博览</li>
-          <li @click="toProject(3)">社团管理系统</li>
-          <li @click="toProject(4)">思政学时</li>
-          <li @click="toProject(5)">毕业典礼排队系统</li>
-          <li @click="toProject(6)">宿舍管理系统</li>
+          <li v-for="(item, index) in displayProject" @click="toProject(index+1)" >{{ item.name }}</li>
         </ul>
       </div>
       <div class="menu-item">

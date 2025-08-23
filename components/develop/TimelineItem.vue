@@ -14,7 +14,7 @@
           v-if="detail.position == 'COO' || detail.position == 'CEO' || detail.position == 'CTO' || detail.position == 'CDO'">
           {{ detail.position }}
         </span>
-        <span v-else>{{ detail.department + detail.position }}</span>
+        <span v-else>{{ detail.department + ' ' + detail.position }}</span>
       </div>
       <div class="managers-company" v-if="detail.destination !== '无' && detail.destination !== '在读'">
         <img src="https://quanta-web-1306963863.cos.ap-guangzhou.myqcloud.com/font/%E5%85%AC%E6%96%87%E5%8C%85%20(2)@2x.png"

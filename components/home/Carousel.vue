@@ -7,7 +7,9 @@
       :interval="3000"
       >
       <el-carousel-item v-for="(item, index) in list" :key="index">
-        <img :src="item.href" alt="图片无法显示" />
+        <div class="home-carousel-img">
+          <img :src="item.href" alt="图片无法显示" />
+        </div>
         <div class="home-carousel-text">
           <div>
             <div class="home-carousel-title">
@@ -167,7 +169,7 @@ const props = defineProps({
         display: block;
       }
     }
-    img {
+    .home-carousel-img {
       height: 100%;
       width: 56%;
       @media screen and (max-width: 767px) {
@@ -175,6 +177,13 @@ const props = defineProps({
           height: 40%;
           width: 100%;
         }
+      }
+      img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
       }
     }
   }

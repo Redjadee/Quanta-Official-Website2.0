@@ -40,7 +40,6 @@ onMounted(() => {
 .develop-project {
   padding: 0.5rem;
   box-sizing: border-box;
-  height: calc(100vh - 1.2rem);
   .develop-project-item {
     display: flex;
     height: 2.4rem;
@@ -55,7 +54,8 @@ onMounted(() => {
     }
     @media screen and (max-width: 767px) {
       & {
-        display: block;
+        flex-direction: column;
+        align-items: center;
         margin: 10vw 0;
         height: auto;
       }
@@ -63,7 +63,7 @@ onMounted(() => {
 
     .develop-project-text {
       font-weight: bold;
-      flex: 3;
+      flex: 4;
       margin-right: 0.3rem;
       @media screen and (max-width: 767px) {
         & {
@@ -102,23 +102,24 @@ onMounted(() => {
       }
     }
     .develop-project-img {
-      flex: 4;
+      flex: 3;
       display: flex;
       align-items: center;
       justify-content: flex-end;
+      height: 90%;
+      width: 75%;
       @media screen and (max-width: 767px) {
         & {
           justify-content: center;
+          width: 85%;
         }
       }
       img {
-        height: 90%;
-        width: 75%;
-        @media screen and (max-width: 767px) {
-          & {
-            width: 85%;
-          }
-        }
+        display: block;       /* 去掉默认基线空隙 */
+        width: 100%;
+        height: 100%;
+        object-fit: cover;    /* 关键：裁剪填充 */
+        object-position: center;
       }
     }
   }
