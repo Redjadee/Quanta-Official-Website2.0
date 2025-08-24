@@ -73,19 +73,19 @@ onMounted(() => {
 }
 
 .up {
-  top: 0.5rem;
+  top: calc(15% - 1.2rem);
   @media screen and (max-width: 767px) {
     & {
-      top: 0.7rem;
+      top: calc(15% - 20vw);
     }
   }
 }
 
 .down {
-  bottom: 1.5rem;
+  bottom: calc(20% - 1.2rem);
   @media screen and (max-width: 767px) {
     & {
-      bottom: 1rem;
+      bottom: calc(20% - 20vw);
     }
   }
 }

@@ -102,7 +102,7 @@ watch(checked, (newVal) => {
         </ul>
       </div>
       <div class="menu-item">
-        <p>© 2006-2022 Quanta（量子）信息技术服务中心</p>
+        <p>© 2006-2025 Quanta（量子）信息技术服务中心</p>
       </div>
     </div>
   </div>

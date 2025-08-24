@@ -54,7 +54,7 @@ const getTabLink = (item: any) => {
 #tab-bar {
   display: flex;
   align-items: center;
-  margin-left: 3rem;
+  // margin-left: 3rem;
   @media screen and (max-width: 767px) {
     & {
       display: none;

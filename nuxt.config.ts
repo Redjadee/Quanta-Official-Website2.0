@@ -20,5 +20,18 @@ export default defineNuxtConfig({
 
   site: {
     url: 'https://quantacenter.com'
+  },
+
+  app: {
+    head: {
+      title: 'Quanta center',
+      titleTemplate: '%s',
+      htmlAttrs: {
+        lang: 'zh-cn',
+      },
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      ]
+    }
   }
 })

@@ -63,7 +63,6 @@ defineOptions({
 #home-main {
   width: 80%;
   margin: 0 auto;
-  padding-top: 0.5rem;
   @media screen and (max-width: 767px) {
     & {
       padding-top: 5vw;
@@ -73,6 +72,8 @@ defineOptions({
   .home-main-pc {
     display: flex;
     justify-content: center;
+    align-items: center;
+    height: calc(100vh - 1.2rem);
     @media screen and (max-width: 767px) {
       & {
         display: none;

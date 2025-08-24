@@ -1,7 +1,7 @@
 <template>
   <div id="app" :style="activeBackground" :class="{ isMenuOpen: isMenuOpen }">
     <nav>
-      <NuxtLink to="/">
+      <NuxtLink to="/" class="quanta-title-wrapper">
         <h1 class="quanta-title" :style="titleColor">quanta</h1>
       </NuxtLink>
       <MenuButton :menu-color="menuColor" />
@@ -57,13 +57,6 @@ const activeBackground = computed(() => {
 onMounted(() => {
   width.value = window.innerWidth
 })
-
-watch(
-  () => store.swiperActiveIndex, 
-  (newVal, oldVal) => {
-    console.log('from', oldVal, 'to', newVal)
-  }
-)
 </script>
 
 <style lang="scss" scoped>
@@ -77,16 +70,27 @@ watch(
     width: 80%;
     margin: 0 auto;
     align-items: center;
+    justify-content: center;
     height: 1.2rem;
-    // padding-top: 0.3rem;
+    position: relative;
     
     @media screen and (max-width: 767px) {
       & {
+        position: initial;
         height: 20vw;
         justify-content: space-between;
       }
     }
+    .quanta-title-wrapper {
+      position: absolute;
+      left: 0;
 
+      @media screen and (max-width: 767px) {
+        & {
+          position: initial;
+        }
+      }
+    }
     .quanta-title {
       cursor: pointer;
       font-family: quanta;
@@ -95,7 +99,7 @@ watch(
 
       @media screen and (max-width: 767px) {
         & {
-          font-size: 3.5vw;
+          font-size: 4.3vw;
         }
       }
     }

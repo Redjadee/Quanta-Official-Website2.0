@@ -5,7 +5,7 @@
         <DevelopTimeline :list="managersList" />
       </div>
       <!-- ~confirm: 没有正常显示 这是实现什么功能？ -->
-      <div class="manager-timeline">
+      <!-- <div class="manager-timeline">
         <ul :style="computedTranslate">
           <li v-for="i in maxTerm" :key="i" class="manager-timeline-item" @click="switchShowManager(i, $event)" :class="{
             isMiddle: showManagerId === i
@@ -14,14 +14,14 @@
             <span class="timeline-line"></span>
           </li>
         </ul>
-      </div>
+      </div> -->
       <!--  -->
-      <div class="timeline-left" @click="turnLeft">
+      <!-- <div class="timeline-left" @click="turnLeft">
         <img src="https://quanta-web-1306963863.cos.ap-guangzhou.myqcloud.com/font/%E5%90%91%E5%B7%A6@2x.png" alt="向左" />
       </div>
       <div class="timeline-right" @click="turnRight">
         <img src="https://quanta-web-1306963863.cos.ap-guangzhou.myqcloud.com/font/%E5%90%91%E5%8F%B3@2x.png" alt="向右" />
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -115,8 +115,10 @@ onMounted(() => {
 
     @media screen and (max-width: 767px) {
       & {
-        height: 70vh;
-        max-height: 70vh;
+        height: calc(100vh - 20vw); // temp style
+        max-height: fit-content; // temp style
+        // height: 70vh;
+        // max-height: 70vh;
         margin-bottom: 5vw;
       }
     }
