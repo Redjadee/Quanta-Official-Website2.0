@@ -2,3 +2,7 @@ html {
     font-size: 80px; 
     /* ~pending: 函数式更好 */
 }
+
+a {
+    color: #551A8B;
+}

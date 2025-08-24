@@ -33,7 +33,7 @@
     </section>
     <section class="footer-watermark">
       © 2006-2025 Quanta（量子）信息技术服务中心<br />
-      粤ICP备14087613号
+      <a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备14087613号</a>
     </section>
   </div>
 </template>
@@ -187,6 +187,9 @@ const connectPerson = ref(connectPersonName)
         transform: translateX(0);
         font-size: 3.5vw;
       }
+    }
+    a {
+      color: white;
     }
   }
 }
