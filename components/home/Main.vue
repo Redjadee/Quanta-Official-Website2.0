@@ -79,7 +79,7 @@ defineOptions({
     flex-direction: row;
     align-items: center;
     position: relative;
-    top: -0.7rem;
+    top: -0.6rem;
     @media screen and (max-width: 767px) {
       & {
         display: none;
@@ -140,22 +140,11 @@ defineOptions({
       }
     }
     p {
-      &:nth-child(2) {
-        font-family: broadWay;
-        font-size: 0.82rem;
-        margin-top: 0.2rem;
-        white-space: nowrap;
-        @media screen and (max-width: 767px) {
-          & {
-            margin: 0;
-            margin-top: 4vw;
-            font-size: 11vw;
-          }
-        }
-      }
+      &:nth-child(2),
       &:nth-child(3) {
         font-family: broadWay;
         font-size: 0.82rem;
+        margin-top: 0.2rem;
         margin-bottom: 0.3rem;
         white-space: nowrap;
         @media screen and (max-width: 767px) {
