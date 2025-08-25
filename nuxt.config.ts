@@ -16,7 +16,9 @@ export default defineNuxtConfig({
 
   css: [
     '@/assets/style/global.css', //全局样式
-    '@/assets/style/main.css'
+    '@/assets/style/main.css',
+    '@/assets/style/font.css',
+    '@/assets/style/normalize.css'
   ],
 
   site: {

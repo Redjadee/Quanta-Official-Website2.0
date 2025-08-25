@@ -94,12 +94,12 @@ onMounted(() => {
     .quanta-title {
       cursor: pointer;
       font-family: quanta;
-      font-size: 0.3rem;
+      font-size: 0.2rem;
       color: #28262b;
 
       @media screen and (max-width: 767px) {
         & {
-          font-size: 4.3vw;
+          font-size: 3.5vw;
         }
       }
     }
